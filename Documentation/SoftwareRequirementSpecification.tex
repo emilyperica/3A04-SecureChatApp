@@ -1,0 +1,868 @@
+\documentclass[]{article}
+
+% Imported Packages
+%------------------------------------------------------------------------------
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+%\usepackage{extarrows}
+%\usepackage{setspace}
+%\usepackage{xcolor}
+\usepackage{color}
+\usepackage{multirow} 
+%------------------------------------------------------------------------------
+
+% Header and Footer
+%------------------------------------------------------------------------------
+\pagestyle{plain}  
+\renewcommand\headrulewidth{0.4pt}                                      
+\renewcommand\footrulewidth{0.4pt}                                    
+%------------------------------------------------------------------------------
+
+% Title Details
+%------------------------------------------------------------------------------
+\title{Deliverable \#1: Software Requirement Specification (SRS)}
+\author{SE 3A04: Software Design II -- Large System Design}
+\date{Febuary 16, 2023}
+                            
+%------------------------------------------------------------------------------
+
+% Document
+%------------------------------------------------------------------------------
+\begin{document}
+
+\maketitle	
+\noindent{\bf Tutorial Number:} T02\\
+{\bf Group Number:} G6 \\
+{\bf Group Members:} 
+\begin{itemize}
+	\item Emily Perica
+	\item Harman Bassi
+    \item Kyen So
+    \item Kelly Deng
+    \item Swesan Pathmanathan 
+\end{itemize}
+
+\section*{IMPORTANT NOTES}
+\begin{itemize}
+	\item Be sure to include all sections of the template in your document regardless whether you have something to write for each or not
+	\begin{itemize}
+		\item If you do not have anything to write in a section, indicate this by the \emph{N/A}, \emph{void}, \emph{none}, etc.
+	\end{itemize}
+	\item Uniquely number each of your requirements for easy identification and cross-referencing
+	\item Highlight terms that are defined in Section~1.3 (\textbf{Definitions, Acronyms, and Abbreviations}) with \textbf{bold}, \emph{italic} or \underline{underline}
+	\item For Deliverable 1, please highlight, in some fashion, all (you may have more than one) creative and innovative features. Your creative and innovative features will generally be described in Section~2.2 (\textbf{Product Functions}), but it will depend on the type of creative or innovative features you are including.
+\end{itemize}
+
+\newpage
+\section{Introduction}
+\label{sec:introduction}
+% Begin Section
+
+\hspace{5mm}This SRS describes the software requirements for our messaging application, MacMessenger. The application is meant to provide a secure means of communication within a company. This document will outline the purpose, project scope, requirements, and use cases of the product. \\
+
+
+\subsection{Purpose}
+\label{sub:purpose}
+% Begin SubSection
+\hspace{5mm}This SRS is meant to provide an overview of the requirements imposed upon the MacMessenger system, providing information on functional and non-functional requirements, as well as use cases and potential employee characteristics. The intended audience of this SRS is all stakeholders involved in the MacMessenger product. It will provide a high-level overview of the requirements needed to begin designing the product, using a non-technical language that may be understood by stakeholders who may have a broad range in their understanding of technical terms.
+
+
+% End SubSection
+
+\subsection{Scope}
+\label{sub:scope}
+% Begin SubSection
+\hspace{5mm}MacMessenger is a secure messaging application that allows employee to send messages on company issued Android devices through sessions of key authentications and store chat logs on the server. It also allows employee to create group chats, attaching files and customizing account. 
+
+Employees are required to sign-in or create an account to access the application. Main services of the application include “Sending messages”, “Creating group chat”, “Attaching files” and “Customizing account”. In “Sending messages”, employee will fetch a key from KDC and authenticates with the server to start a session and send messages. System will encrypt/decrypt the message using symmetric key cryptography and store the chat log onto the server. In “Creating group chat”, employee(s) can add contacts to group chat creation and others will receive notification for being added. In “Attaching files”, an employee can add a file by dragging it into chat box and click “Send” to display it in chat interface. In “Customizing account”, an employee can modify their account information such as avatar, nick names etc.
+
+The objective of this application is to avoid corporate espionage within the organization by establishing secure communication via authentication keys on company android devices, so to reduce the risks of information leakage and cybersecurity attack. As the software will be used by employees who may have minimal technical background, the software will be intuitive to navigate and accessible. The software will also have fast response time since it is for business use. 
+
+The goal of this software is to promote safe communication means between employees, as companies heavily rely on online communications nowadays. 
+
+% End SubSection
+
+\subsection{Definitions, Acronyms, and Abbreviations}
+\label{sub:definitions_acronyms_and_abbreviations}
+% Begin SubSection
+\textbf{DoS}: Denial of Service attack. A type of cyberattack in which the attacker attempts to stall services by flooding the server with requests.\vspace{2mm}\\
+\textbf{Employee}: A worker employed by the company utilizing MacMessenger. Used interchangeably with ‘user’ throughout the SRS.\vspace{2mm}\\
+\textbf{KDC}: Key Distribution Center. Used to generate all keys used in a secure communication session.\vspace{2mm}\\
+\textbf{MacMessenger}: Secure messaging application.\vspace{2mm}\\
+\textbf{Symmetric-key cryptosystem}: An encryption scheme in which both involved parties have access to a private, pre-determined key.\\
+
+% End SubSection
+
+\subsection{References}
+\label{sub:references}
+% Begin SubSection
+\begin{itemize}
+	\item Provide a complete list of all documents referenced elsewhere in the SRS.
+	\item Identify each document by title, report number (if applicable), date, and publishing organization.
+	\item Specify the sources from which the references can be obtained.
+	\item Order this list in some sensible manner (alphabetical by author, or something else that makes more sense).
+\end{itemize}
+% End SubSection
+
+\subsection{Overview}
+\label{sub:overview}
+% Begin SubSection
+\hspace{10mm}Section 2 provides a general description of the product, delving into the perspectives, functions, users, constraints, and assumptions that must be considered when designing the system. Section 3 presents a Use Case Diagram to provide the reader with a visual understanding of the desired flow of the system. Section 4 describes the Functional Requirements of the system, and section 5 describes the Non-Functional Requirements of the system. Lastly, Section A contains the Division of Labour of this SRS.
+% End SubSection
+
+% End Section
+
+\section{Overall Product Description}
+\label{sec:overall_description}
+% Begin Section
+
+\subsection{Product Perspective}
+\label{sub:product_perspective}
+% Begin SubSection
+tbd.\\
+% End SubSection
+
+\subsection{Product Functions}
+\label{sub:product_functions}
+% Begin SubSection
+tbd.\\
+% End SubSection
+
+\subsection{User Characteristics}
+\label{sub:user_characteristics}
+% Begin SubSection
+This system is meant to be user friendly and simple to navigate; it will be designed with the following stakeholders in mind:\\
+User group 1: Interns (Primary stakeholder)
+\begin{itemize}
+    \item Part-way through a bachelor’s degree
+    \item 19-23 years old
+    \item Android users
+    \item Have internet access.
+    \item Little to no experience in their field
+\end{itemize}
+
+\noindent User group 2: Full time employees (Primary stakeholder)
+\begin{itemize}
+    \item Minimum education: bachelor’s degree
+    \item 23+ years old
+    \item Android users
+    \item Have internet access.
+    \item Experience ranging from junior level to upper management.
+\end{itemize}
+
+\noindent User group 3: IT Employees/Technical Maintainers (Tertiary stakeholder)
+\begin{itemize}
+    \item Have at least a bachelor’s degree
+    \item Tech-savvy
+    \item 23+ years old
+    \item Have internet access.
+    \item Have a thorough understanding of the communication system and its technical maintenance.
+\end{itemize}
+% End SubSection
+
+\subsection{Constraints}
+\label{sub:constraints}
+% Begin SubSection
+\hspace{5mm}The project's development is bound by several key constraints that affect its timeline, design, and functionality. The necessity to complete the project by a specified due date, alongside the imperative to balance security measures with a employee-friendly design, notably influences the development approach. Compatibility requirements with Android devices, considerations for mobile resource limitations, and the need to ensure the application operates reliably across varied network conditions further restrict development choices. Additionally, adherence to data protection laws and integration with existing organizational infrastructure pose significant considerations.
+
+Furthermore, the application's design must prioritize scalability and ease of maintenance to accommodate future growth, all while adhering to a defined budget. Secure data management, including chat history and compliance with data retention policies, alongside comprehensive testing, and quality assurance processes, are crucial for safeguarding employee information and ensuring the app's reliability. These constraints collectively guide the development process, ensuring the final product meets organizational needs, regulatory requirements, and employee expectations, even within the constraints of cost, performance, and security.
+
+% End SubSection
+
+\subsection{Assumptions and Dependencies}
+\label{sub:assumptions_and_dependencies}
+% Begin SubSection
+\begin{itemize}
+	\item List any assumptions you made in interpreting what the software being developed is aiming to achieve
+	\item The software will only be provided on company-issued Android devices. Not supported on other devices in the market.
+    \item Devices will have stable connection to the Internet during communication. 
+    \item It is assumed that the server for storing chat history logs will be provided, and will always have sufficient storage space for chat logs. 
+    \item It is assumed that there is a database for storing existing employee names/passwords
+    \item It is assumed that there is no restriction on what types of authentication protocols and cryptosystem that will be implemented in the software (? More like constraints?)
+    \item The software will only be used within Canada.
+
+\end{itemize}
+% End SubSection
+
+\subsection{Apportioning of Requirements}
+\label{sub:apportioning_of_requirements}
+% Begin SubSection
+\hspace{5mm}Certain requirements may be earmarked for implementation in future versions of the system to ensure that the initial release is manageable, focuses on core functionalities, and can meet the deadline and budget constraints. Advanced features such as enhanced encryption algorithms for even higher security, deeper integration with other organizational systems, additional employee customization options, expanded compatibility with a broader range of Android versions, or more sophisticated chat functionalities (like file attachment or editing messages, group management features) might be deferred. 
+% End SubSection
+
+% End Section
+\section{Use Case Diagram}
+\label{sec:use_case_diagram}
+% Begin Section
+\begin{center}
+    \includegraphics{Graphics/3UseCaseDiagram.png}\\
+    \emph{Figure 2: Use Case diagram for Sending a Message}
+\end{center}
+
+\hspace{5mm}Sending Message is the business event that the use case diagram represents. The use case diagram is to highlight how the employee would go about sending a secure message through the application. So, the user will login in, then select the chat room and send the message. There are also some secondary scenarios covered like if the login is denied. This is to cover the main possibilities within the sending business events.
+% End Section
+
+\section{Highlights of Functional Requirements}
+\label{sec:functional_requirements}
+% Begin Section
+The business events we will consider:
+
+\textbf{BE1.} Sending message
+
+\textbf{BE2.} Group chat creation
+
+\textbf{BE3.} Password recovery
+
+\textbf{BE4.} Customize account
+
+\textbf{BE5.} Logging in
+
+\textbf{BE6.} Account register
+
+\textbf{BE7.} Attaching file
+
+\textbf{BE8.} Accessing chatlog
+
+\textbf{BE9.} Updating key\\
+
+\noindent The viewpoints we will consider:
+
+\textbf{VP1.} Employee
+
+\textbf{VP2.} Administrator
+
+\textbf{VP3.} Customer support
+
+\textbf{VP4.} Maintenance
+
+\textbf{VP5.} Cybersecurity
+
+\textbf{VP6.} Management\\
+
+\noindent {\bf Interpretation:} Specify any liberties you took in interpreting business events, if necessary.\\
+
+\begin{enumerate}[{\bf BE1.}]
+	\item Sending Message\\
+        \textbf{Pre-condition:} The employee must already have an account.
+		\begin{enumerate}[{\bf VP1.}]
+			\item Employee \\
+				\textbf{Main Success Scenario:}
+                \begin{enumerate}[{  1.}]
+                    \item Employee opens the MacMessenger app on their phone.
+                    \item System requires the employee to login and displays the login fields.
+                    \item Employee logs into the app.
+                    \item System authenticates the employee.
+                    \item System shows the account, and chat options.
+                    \item Employee chooses chat option. 
+                    \item System authenticates employee.
+                    \item System displays chat box.
+                    \item Employee enters message into chat box and clicks send.
+                    \item System encrypts message. 
+                    \item System sends message to the recipient.
+                    \item Recipient receives encrypted message. 
+                    \item System decrypts message with key.
+                    \item System stores message in the chatlog.
+                \end{enumerate}
+                \textbf{Secondary Scenario:}
+                \begin{enumerate}
+                    \item[4i.] System fails to authenticate the employee in login.
+                    \begin{enumerate}
+                        \item[4i.1] System prompts for re-entry of login details.
+                        \item[4i.2] Sending Message failed.
+                    \end{enumerate}
+                    \item[7i.] System fails to authenticate the employee for the chat session.
+                    \begin{enumerate}
+                        \item[7i.1] System logs the employee out.
+                        \item[7i.2] Sending Message failed.
+                    \end{enumerate}
+                    \item[9i.] employee enters an invalid format or restricted content in the message.
+                    \begin{enumerate}
+                        \item[9i.1] System displays an error message and requests correction.
+                        \item[9i.2] Sending Message failed.
+                    \end{enumerate}
+                    \item[10i.] System fails to encrypt the message.
+                    \begin{enumerate}
+                        \item[10i.1] System notifies the employee of the encryption error.
+                        \item[10i.2] Sending Message failed.
+                    \end{enumerate}
+                    \item[11i.] System fails to send the message to the recipient.
+                    \begin{enumerate}
+                        \item[11i.1] System notifies the employee of the sending error.
+                        \item[11i.2] Sending Message failed.
+                    \end{enumerate}
+                    \item[13i.] System fails to decrypt the message for the recipient.
+                    \begin{enumerate}
+                        \item[13i.1] Recipient receives a notification of decryption error.
+                        \item[13i.2] Message is stored encrypted, pending resolution.
+                    \end{enumerate}
+                \end{enumerate}
+		  \item Administrator \\
+				N/A
+            \item Customer support \\
+            \begin{enumerate}
+                \item[4i.] System displays an error message to try again or contact customer support for assistance.
+                \begin{enumerate}
+                    \item[4i.1] System provides a direct link or contact details for the MacMessenger customer support team.
+                \end{enumerate}
+                \item[9i.] Employee enters an invalid format or restricted content in the message.
+                \begin{enumerate}
+                    \item[9i.1] System displays an error message and requests correction.
+                    \item[9i.2] Sending Message failed.
+                \end{enumerate}
+                \item[10i.] System fails to encrypt the message.
+                \begin{enumerate}
+                    \item[10i.1] System notifies the employee of the encryption error.
+                    \item[10i.2] Sending Message failed.
+                \end{enumerate}
+                \item[11i.] System fails to send the message to the recipient.
+                \begin{enumerate}
+                    \item[11i.1] System notifies the employee of the sending error.
+                    \item[11i.2] Sending Message failed.
+                \end{enumerate}
+            \item Maintenance \\
+            N/A
+            \item Cybersecurity \\
+            N/A
+            \item Management \\
+            N/A \\
+		\end{enumerate}
+		{\bf Global Scenario:}\\
+        \begin{enumerate}[{  }]
+            \item \textbf{Precondition:} The employee must already have an account.
+            \item \textbf{Main Success Scenario:}
+            \begin{enumerate}[{  1.}]
+                \item Employee opens the MacMessenger app on their Android device.
+                \item System requires the employee to login and 
+            \end{enumerate}
+        \end{enumerate}
+		\textcolor{red}{Insert Scenario Here}
+	\item Business Event Name \#2
+	\begin{enumerate}[{\bf VP1.}]
+		  \item Viewpoint Name \#1 \\
+		  \textcolor{red}{Insert Scenario Here}
+		\item Viewpoint Name \#2 \\
+		\textcolor{red}{Insert Scenario Here}
+	\end{enumerate}
+	{\bf Global Scenario:}\\
+	\textcolor{red}{Insert Scenario Here}
+\end{enumerate}
+
+%	Below, we organize by Business Event.
+%	\begin{enumerate}[{BE}1.]
+%		\item Business Event name
+%		\begin{enumerate}[{VP1}.1]
+%			\item Viewpoint name \newline
+%			\noindent\fbox{%
+%				\parbox{0.5\textwidth}{%
+%					\begin{itemize}
+%						\item {\bf $S_{1}$:} Initial response of the system to the Business Event
+%						\item {\bf $E_{1}$:}  Reaction of the environment to $S_{1}$
+%						\item {\bf $S_{2}$:}  Response of the system to $E_{1}$
+%						\item {\bf $E_{2}$:}  Reaction of the environment to $S_{2}$
+%						\item[] $\cdots$
+%						\item {\bf $S_{n}$:}  Response of the system to $E_{(n-1)}$
+%						\item {\bf $E_{n}$:}  Reaction of the environment to $E_{(n-1)}$
+%						\item {\bf $S_{(n+1)}$:} Final response of the system concluding its function regarding the Business Event
+%					\end{itemize}
+%				}%
+%			}
+%			\item Viewpoint name\newline
+%			\noindent\fbox{%
+%				\parbox{0.5\textwidth}{%
+%					\begin{itemize}
+%						\item {\bf $S_{1}$:} Initial response of the system to the Business Event
+%						\item {\bf $E_{1}$:}  Reaction of the environment to $S_{1}$
+%						\item {\bf $S_{2}$:}  Response of the system to $E_{1}$
+%						\item {\bf $E_{2}$:}  Reaction of the environment to $S_{2}$
+%						\item[] $\cdots$
+%						\item {\bf $S_{k}$:}  Response of the system to $E_{(k-1)}$
+%						\item {\bf $E_{k}$:}  Reaction of the environment to $E_{(k-1)}$
+%						\item {\bf $S_{(k+1)}$:} Final response of the system concluding its function regarding the Business Event
+%					\end{itemize}
+%				}%
+%			}
+%			\item \dots
+%			\item \dots
+%			\item \dots
+%			\item[\dots]
+%		\end{enumerate}	
+%		\item[] {\bf Global Scenario of {\it Business Event Name}:} It is the scenario corresponding to the integration of all the above scenarios from the different Viewpoints of the Business Event BE1.\newline
+%		\noindent\fbox{%
+%			\parbox{0.5\textwidth}{%
+%				\begin{itemize}
+%					\item {\bf $S_{1}$:} Initial response of the system to the Business Event
+%					\item {\bf $E_{1}$:}  Reaction of the environment to $S_{1}$
+%					\item {\bf $S_{2}$:}  Response of the system to $E_{1}$
+%					\item {\bf $E_{2}$:}  Reaction of the environment to $S_{2}$
+%					\item[] $\cdots$
+%					\item {\bf $S_{m}$:}  Response of the system to $E_{(m-1)}$
+%					\item {\bf $E_{m}$:}  Reaction of the environment to $E_{(m-1)}$
+%					\item {\bf $S_{(m+1)}$:} Final response of the system concluding its function regarding the Business Event
+%				\end{itemize}
+%			}%
+%		}	
+%		%\end{enumerate}
+%		\item Business Event name
+%		\begin{enumerate}[{VP1}.1]
+%			\item Viewpoint name \newline
+%			\noindent\fbox{%
+%				\parbox{0.5\textwidth}{%
+%					\begin{itemize}
+%						\item {\bf $S_{1}$:} Initial response of the system to the Business Event
+%						\item {\bf $E_{1}$:}  Reaction of the environment to $S_{1}$
+%						\item {\bf $S_{2}$:}  Response of the system to $E_{1}$
+%						\item {\bf $E_{2}$:}  Reaction of the environment to $S_{2}$
+%						\item[] $\cdots$
+%						\item {\bf $S_{n'}$:}  Response of the system to $E_{(n'-1)}$
+%						\item {\bf $E_{n'}$:}  Reaction of the environment to $E_{(n'-1)}$
+%						\item {\bf $S_{(n'+1)}$:} Final response of the system concluding its function regarding the Business Event
+%					\end{itemize}
+%				}%
+%			}
+%			\item Viewpoint name\newline
+%			\noindent\fbox{%
+%				\parbox{0.5\textwidth}{%
+%					\begin{itemize}
+%						\item {\bf $S_{1}$:} Initial response of the system to the Business Event
+%						\item {\bf $E_{1}$:}  Reaction of the environment to $S_{1}$
+%						\item {\bf $S_{2}$:}  Response of the system to $E_{1}$
+%						\item {\bf $E_{2}$:}  Reaction of the environment to $S_{2}$
+%						\item[] $\cdots$
+%						\item {\bf $S_{k'}$:}  Response of the system to $E_{(k'-1)}$
+%						\item {\bf $E_{k'}$:}  Reaction of the environment to $E_{(k'-1)}$
+%						\item {\bf $S_{(k'+1)}$:} Final response of the system concluding its function regarding the Business Event
+%					\end{itemize}
+%				}%
+%			}
+%			\item \dots
+%			\item \dots
+%			\item \dots
+%			\item[\dots]
+%		\end{enumerate}	
+%		\item[] {\bf Global Scenario of {\it Business Event Name}:} It is the scenario corresponding to the integration of all the above scenarios from the different Viewpoints of the Business Event BE2.\newline
+%		\noindent\fbox{%
+%			\parbox{0.5\textwidth}{%
+%				\begin{itemize}
+%					\item {\bf $S_{1}$:} Initial response of the system to the Business Event
+%					\item {\bf $E_{1}$:}  Reaction of the environment to $S_{1}$
+%					\item {\bf $S_{2}$:}  Response of the system to $E_{1}$
+%					\item {\bf $E_{2}$:}  Reaction of the environment to $S_{2}$
+%					\item[] $\cdots$
+%					\item {\bf $S_{m'}$:}  Response of the system to $E_{(m'-1)}$
+%					\item {\bf $E_{m'}$:}  Reaction of the environment to $E_{(m'-1)}$
+%					\item {\bf $S_{(m'+1)}$:} Final response of the system concluding its function regarding the Business Event
+%				\end{itemize}
+%			}%
+%		}		
+%	\end{enumerate}
+
+%End Section
+
+\section{Non-Functional Requirements}
+\label{sec:non-functional_requirements}
+
+% Begin Section
+\subsection{Look and Feel Requirements}
+\label{sub:look_and_feel_requirements}
+% Begin SubSection
+
+\subsubsection{Appearance Requirements}
+\label{ssub:appearance_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{LF-A}1. ]
+	\item \emph{The application must fill to fit the screen of all Android devices.}\\
+        {\bf Rationale:} The system will be used on a variety of different Android devices.
+\end{enumerate}
+\begin{enumerate}[{LF-A}2. ]
+	\item \emph{The application must use a minimalistic design style.}\\
+        {\bf Rationale:} A minimalistic design will allow a new user to more easily grasp the main functions of the application.	
+\end{enumerate}
+\begin{enumerate}[{LF-A}3. ]
+	\item \emph{The application must not utilize overly bright or saturated colours.}\\
+        {\bf Rationale:} Bright and oversaturated colours may be difficult to read, or make it difficult to look at the application for extended periods of time.
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Style Requirements}
+\label{ssub:style_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{LF-S}1. ]
+	\item \emph{The application must provide strong contrast between lettering and background.} \\
+        {\bf Rationale:} Strong contrast will increase readability.
+\end{enumerate}
+\begin{enumerate}[{LF-S}2. ]
+        \item \emph{The application must utilize the same colour palette across the user interface.} \\
+        {\bf Rationale:} A standardized colour palette will provide a sense of unity across the different function of the application.
+\end{enumerate}
+
+
+% End SubSubSection
+
+% End SubSection
+
+\subsection{Usability and Humanity Requirements}
+\label{sub:usability_and_humanity_requirements}
+% Begin SubSection
+
+\subsubsection{Ease of Use Requirements}
+\label{ssub:ease_of_use_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{UH-EOU}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Personalization and Internationalization Requirements}
+\label{ssub:personalization_and_internationalization_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{UH-PI}1. ]
+	\item \emph{International keyboards must be supported to allow messages with all global alphabets, accents, and characters.}\\
+    {\bf Rationale:} A global company using this application may have employees wishing to communicate in many different languages.
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Learning Requirements}
+\label{ssub:learning_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{UH-L}1. ]
+	\item \emph{The user must be able to understand how to use the application within the first 10 minutes of signing in.}\\
+        {\bf Rationale:} Some users may have minimal technical knowledge, and prefer a small learning curve to make usage of the app simple.
+\end{enumerate}
+% End SubSubSection
+
+
+\subsubsection{Understandability and Politeness Requirements}
+\label{ssub:understandability_and_politeness_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{UH-UP}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Accessibility Requirements}
+\label{ssub:accessibility_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{UH-A}1. ]
+	\item \emph{Text-to-speech must be provided throughout the app.}\\
+        {\bf Rationale:} Accessibility for users with limited/no vision.
+\end{enumerate}
+\begin{enumerate}[{UH-A}2. ]
+	\item \emph{The app must integrate with the native OS’s accessibility services.}\\
+        {\bf Rationale:} Decrease learning curve of the application by providing services the user is already familiar with.
+\end{enumerate}
+\begin{enumerate}[{UH-A}3. ]
+	\item \emph{The user must be able to increase or decrease the size of text displayed [y].}\\
+        {\bf Rationale:} Users may have different levels of visual impairments.
+\end{enumerate}
+\begin{enumerate}[{UH-A}4. ]
+	\item \emph{The application must provide support for speech-to-text [y].}\\
+        {\bf Rationale:} Accessibility for users with visual or fine-motor impairments, or similar.
+\end{enumerate}
+% End SubSubSection
+
+% End SubSection
+
+\subsection{Performance Requirements}
+\label{sub:performance_requirements}
+% Begin SubSection
+
+\subsubsection{Speed and Latency Requirements}
+\label{ssub:speed_and_latency_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{PR-SL}1. ]
+	\item \emph{Messages must be updated in a chat within 10ms, provided each user has a strong internet connection.}\\
+        {\bf Rationale:} Decrease latency to make communication appear instantaneous.
+\end{enumerate}
+\begin{enumerate}[{PR-SL}2. ]
+	\item \emph{Application start-up time must be less than 5 seconds.}\\
+        {\bf Rationale:} Increase perceived trustworthiness of the application *COME BACK TO THIS*.
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Safety-Critical Requirements}
+\label{ssub:safety_critical_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{PR-SC}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Precision or Accuracy Requirements}
+\label{ssub:precision_or_accuracy_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{PR-PA}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Reliability and Availability Requirements}
+\label{ssub:reliability_and_availability_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{PR-RA}1. ]
+	\item \emph{The application must be available to users 24/7.}\\
+        {\bf Rationale:}
+\end{enumerate}
+\begin{enumerate}[{PR-RA}2. ]
+	\item \emph{The application must perform with a success rate of 95\% [z].}\\
+        {\bf Rationale:}
+\end{enumerate}
+\begin{enumerate}[{PR-RA}3. ]
+	\item \emph{The application must be able to recover from errors without experiencing data loss or service failures [z].}\\
+        {\bf Rationale:}
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Robustness or Fault-Tolerance Requirements}
+\label{ssub:robustness_or_fault_tolerance_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{PR-RFT}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Capacity Requirements}
+\label{ssub:capacity_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{PR-C}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Scalability or Extensibility Requirements}
+\label{ssub:scalability_or_extensibility_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{PR-SE}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Longevity Requirements}
+\label{ssub:longevity_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{PR-L}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+% End SubSection
+
+\subsection{Operational and Environmental Requirements}
+\label{sub:operational_and_environmental_requirements}
+% Begin SubSection
+
+\subsubsection{Expected Physical Environment}
+\label{ssub:expected_physical_environment}
+% Begin SubSubSection
+\begin{enumerate}[{OE-EPE}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Requirements for Interfacing with Adjacent Systems}
+\label{ssub:requirements_for_interfacing_with_adjacent_systems}
+% Begin SubSubSection
+\begin{enumerate}[{OE-IA}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Productization Requirements}
+\label{ssub:productization_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{OE-P}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Release Requirements}
+\label{ssub:release_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{OE-R}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+% End SubSection
+
+\subsection{Maintainability and Support Requirements}
+\label{sub:maintainability_and_support_requirements}
+% Begin SubSection
+
+\subsubsection{Maintenance Requirements}
+\label{ssub:maintenance_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{MS-M}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Supportability Requirements}
+\label{ssub:supportability_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{MS-S}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Adaptability Requirements}
+\label{ssub:adaptability_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{MS-A}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+% End SubSection
+
+\subsection{Security Requirements}
+\label{sub:security_requirements}
+% Begin SubSection
+
+\subsubsection{Access Requirements}
+\label{ssub:access_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{SR-AC}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Integrity Requirements}
+\label{ssub:integrity_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{SR-INT}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Privacy Requirements}
+\label{ssub:privacy_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{SR-P}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Audit Requirements}
+\label{ssub:audit_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{SR-AU}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Immunity Requirements}
+\label{ssub:immunity_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{SR-IM}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+% End SubSection
+
+\subsection{Cultural and Political Requirements}
+\label{sub:cultural_and_political_requirements}
+% Begin SubSection
+
+\subsubsection{Cultural Requirements}
+\label{ssub:cultural_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{CP-C}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Political Requirements}
+\label{ssub:political_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{CP-P}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+% End SubSection
+
+\subsection{Legal Requirements}
+\label{sub:legal_requirements}
+% Begin SubSection
+
+\subsubsection{Compliance Requirements}
+\label{ssub:compliance_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{LR-COMP}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+\subsubsection{Standards Requirements}
+\label{ssub:standards_requirements}
+% Begin SubSubSection
+\begin{enumerate}[{LR-STD}1. ]
+	\item 
+\end{enumerate}
+% End SubSubSection
+
+% End SubSection
+
+% End Section
+
+\appendix
+\section{Division of Labour}
+\label{sec:division_of_labour}
+% Begin Section
+\begin{center}
+\begin{tabular}{|l|l|}
+     \hline
+     {\bf Emily Perica} & 1.1. Purpose \\
+      & 1.2. Scope \\
+     Signature: & 2.3. User Characteristics \\
+      & 5. Nonfunctional Requirements \\
+      \includegraphics{Graphics/emily.png} &  \\
+     \hline
+     {\bf Harman Bassi} & 1.2. Scope \\ 
+      &  2.1. Product Perspective\\
+      Signature: & 5. Nonfunctional Requirements \\
+      & \\
+     \hline
+      {\bf Kyen So} & 1.2. Scope \\ 
+      &  2.2. Product Functions\\
+      Signature: & 5. Nonfunctional Requirements \\
+      \includegraphics{Graphics/kyen.png} &  \\
+     \hline     
+     {\bf Kelly Deng} & 1.2. Scope \\ 
+      & 2.5. Assumptions and Dependencies\\
+      Signature: & 4. Functional Requirements \\
+      & \\
+      \includegraphics{Graphics/kelly.jpg} &  \\
+      & \\
+     \hline
+     {\bf Swesan Pathmanathan} & 1.2. Scope \\ 
+      & 2.6. Apportioning Requirements \\
+      Signature: & 4. Functional Requirements \\
+      \includegraphics{Graphics/swesan.png} &  \\
+     \hline
+\end{tabular}
+\end{center}
+% End Section
+
+%\newpage
+%\section*{IMPORTANT NOTES}
+%\begin{itemize}
+%	\item Be sure to include all sections of the template in your document regardless whether you have something to write for each or not
+%	\begin{itemize}
+%		\item If you do not have anything to write in a section, indicate this by the \emph{N/A}, \emph{void}, \emph{none}, etc.
+%	\end{itemize}
+%	\item Uniquely number each of your requirements for easy identification and cross-referencing
+%	\item Highlight terms that are defined in Section~1.3 (\textbf{Definitions, Acronyms, and Abbreviations}) with \textbf{bold}, \emph{italic} or \underline{underline}
+%	\item For Deliverable 1, please highlight, in some fashion, all (you may have more than one) creative and innovative features. Your creative and innovative features will generally be described in Section~2.2 (\textbf{Product Functions}), but it will depend on the type of creative or innovative features you are including.
+%\end{itemize}
+
+
+\end{document}
+%------------------------------------------------------------------------------

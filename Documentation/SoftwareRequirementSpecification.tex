@@ -80,11 +80,11 @@
 % Begin SubSection
 \hspace{5mm}MacMessenger is a secure messaging application that allows employee to send messages on company issued Android devices through sessions of key authentications and store chat logs on the server. It also allows employee to create group chats, attaching files and customizing account. 
 
-Employees are required to sign-in or create an account to access the application. Main services of the application include “Sending messages”, “Creating group chat”, “Attaching files” and “Customizing account”. In “Sending messages”, employee will fetch a key from KDC and authenticates with the server to start a session and send messages. System will encrypt/decrypt the message using symmetric key cryptography and store the chat log onto the server. In “Creating group chat”, employee(s) can add contacts to group chat creation and others will receive notification for being added. In “Attaching files”, an employee can add a file by dragging it into chat box and click “Send” to display it in chat interface. In “Customizing account”, an employee can modify their account information such as avatar, nick names etc.
+\hspace{5mm}Employees are required to sign-in or create an account to access the application. Main services of the application include “Sending messages”, “Creating group chat”, “Attaching files” and “Customizing account”. In “Sending messages”, employee will fetch a key from KDC and authenticates with the server to start a session and send messages. System will encrypt/decrypt the message using symmetric key cryptography and store the chat log onto the server. In “Creating group chat”, employee(s) can add contacts to group chat creation and others will receive notification for being added. In “Attaching files”, an employee can add a file by dragging it into chat box and click “Send” to display it in chat interface. In “Customizing account”, an employee can modify their account information such as avatar, nick names etc.
 
-The objective of this application is to avoid corporate espionage within the organization by establishing secure communication via authentication keys on company android devices, so to reduce the risks of information leakage and cybersecurity attack. As the software will be used by employees who may have minimal technical background, the software will be intuitive to navigate and accessible. The software will also have fast response time since it is for business use. 
+\hspace{5mm}The objective of this application is to avoid corporate espionage within the organization by establishing secure communication via authentication keys on company android devices, so to reduce the risks of information leakage and cybersecurity attack. As the software will be used by employees who may have minimal technical background, the software will be intuitive to navigate and accessible. The software will also have fast response time since it is for business use. 
 
-The goal of this software is to promote safe communication means between employees, as companies heavily rely on online communications nowadays. 
+\hspace{5mm}The goal of this software is to promote safe communication means between employees, as companies heavily rely on online communications nowadays. 
 
 % End SubSection
 
@@ -206,7 +206,7 @@ User group 1: Interns (Primary stakeholder)
 % Begin SubSection
 \hspace{5mm}The project's development is bound by several key constraints that affect its timeline, design, and functionality. The necessity to complete the project by a specified due date, alongside the imperative to balance security measures with a employee-friendly design, notably influences the development approach. Compatibility requirements with Android devices, considerations for mobile resource limitations, and the need to ensure the application operates reliably across varied network conditions further restrict development choices. Additionally, adherence to data protection laws and integration with existing organizational infrastructure pose significant considerations.
 
-Furthermore, the application's design must prioritize scalability and ease of maintenance to accommodate future growth, all while adhering to a defined budget. Secure data management, including chat history and compliance with data retention policies, alongside comprehensive testing, and quality assurance processes, are crucial for safeguarding employee information and ensuring the app's reliability. These constraints collectively guide the development process, ensuring the final product meets organizational needs, regulatory requirements, and employee expectations, even within the constraints of cost, performance, and security.
+\hspace{5mm}Furthermore, the application's design must prioritize scalability and ease of maintenance to accommodate future growth, all while adhering to a defined budget. Secure data management, including chat history and compliance with data retention policies, alongside comprehensive testing, and quality assurance processes, are crucial for safeguarding employee information and ensuring the app's reliability. These constraints collectively guide the development process, ensuring the final product meets organizational needs, regulatory requirements, and employee expectations, even within the constraints of cost, performance, and security.
 
 % End SubSection
 
@@ -250,17 +250,17 @@ The business events we will consider:
 
 \textbf{BE1.} Sending message
 
-\textbf{BE2.} Group chat creation
+\textbf{BE2.} Group chat creation (Creative Feature)
 
-\textbf{BE3.} Password recovery
+\textbf{BE3.} Password recovery (Creative Feature)
 
-\textbf{BE4.} Customize account
+\textbf{BE4.} Customize account (Creative Feature)
 
 \textbf{BE5.} Logging in
 
 \textbf{BE6.} Account register
 
-\textbf{BE7.} Attaching file
+\textbf{BE7.} Attaching file (Creative Feature)
 
 \textbf{BE8.} Accessing chatlog
 
@@ -387,6 +387,79 @@ The business events we will consider:
 	{\bf Global Scenario:}\\
 	\textcolor{red}{Insert Scenario Here}
 \end{enumerate}
+
+
+
+
+
+
+
+\begin{enumerate}[{\bf BE7.}]
+	\item Attaching file  \\
+        \textbf{Pre-condition:} Employee has an account and has already logged in.
+		\begin{enumerate}[{\bf VP1.}]
+			\item Employee \\
+				\textbf{Main Success Scenario:}
+                \begin{enumerate}[{  1.}]
+                    \item KDC generates a new communication key for employee.
+                    \item Employee fetches a key from the KDC.
+                    \item Employee enters the communication key to start the chat. 
+                    \item System receives the communication key and authenticates it and displays the chat interface.
+                    \item Employee adds a file into the chat box and clicks ‘Send’.
+                    \item System receives the sending request from employee and posts the file into chat interface. 
+                    \item System displays that the file was sent successfully.
+                    \item System stores the chat log and the file info onto the server.
+                    \item Employee quits the chat interface.
+                \end{enumerate}
+                \textbf{Secondary Scenario:}
+                \begin{enumerate}
+                    \item[4i.] Employee unable to authenticate with the generated key 
+                    \begin{enumerate}
+                        \item[4i.1] Employee unable to authenticate with the generated key.
+                        \item[4i.2] Sending file failed.
+                    \end{enumerate}
+                    \item[5i.] Employee added a file exceeding the maximum size limit.
+                    \begin{enumerate}
+                        \item[5i.1] Employee added a file exceeding the maximum size limit.
+                        \item[5i.2] Attaching file failed.
+                    \end{enumerate}
+                    \item[7i.] Employee saw the file sent was failed
+                    \begin{enumerate}
+                        \item[7i.1] Employee saw the file was failed to send over
+                        \item[7i.2] Sending file failed
+                    \end{enumerate}
+                \end{enumerate}
+		  \item Administrator \\
+				N/A
+            \item Customer support \\
+            \begin{enumerate}
+                \item[4i.] System prompts the employee to re-try or connect with Customer Support 
+                \item[7i.] The system gives the employee two choices, either re-send or suggests connecting with Customer Support. 
+                \item[8i.] System receives the error while storing the chat log, and auto-creates a bug ticket for Customer Support. (Out of scope). 
+            \end{enumerate}
+            \item Maintenance \\
+            N/A
+            \item Cybersecurity \\
+            N/A
+            \item Management \\
+            N/A \\
+		\end{enumerate}
+		{\bf Global Scenario:}\\
+        \begin{enumerate}[{  }]
+            \item \textbf{Precondition:} Employee has an account and has already logged in.
+            \item \textbf{Main Success Scenario:}
+            \begin{enumerate}[{  1.}]
+                    \item KDC generates a new communication key for employee.
+                    \item Employee fetches a key from the KDC.
+                    \item Employee enters the communication key to start the chat. 
+                    \item System receives the communication key and authenticates it and displays the chat interface.
+                    \item Employee adds a file into the chat box and clicks ‘Send’.
+                    \item System receives the sending request from employee and posts the file into chat interface. 
+                    \item System displays that the file was sent successfully.
+                    \item System stores the chat log and the file info onto the server.
+                    \item Employee quits the chat interface.
+            \end{enumerate}
+        \end{enumerate}
 
 %	Below, we organize by Business Event.
 %	\begin{enumerate}[{BE}1.]

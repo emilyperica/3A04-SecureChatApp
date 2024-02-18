@@ -125,7 +125,28 @@ The goal of this software is to promote safe communication means between employe
 \subsection{Product Perspective}
 \label{sub:product_perspective}
 % Begin SubSection
-tbd.\\
+\hspace{5mm}Compared to applications like WhatsApp and Singal the main property of the MacMessenger will be to provide proper security between the employees of the company. The end-to-end encryption ensures that the messages in the application are not easily attainable like Signal. MacMessenger focuses on providing a key that would be used to ensure encryption like Signal. Signal makes sure that the key is also not stored in external servers to ensure discrepancy. In terms of looks, the application would resemble Facebook Messenger as it provides the user with a very intuitive design making it easy to understand how to use the messenger app. MacMessenger also allows the user to add or remove people from chat groups. This would resemble all the previous related apps mentioned.
+\newline
+\newline
+\indent The application itself is self-contained as all the main applications are within the company. The product communicates with the businesses database to ensure the employees have an account for specific authorization. Overall, it depends on existing interfaces that exist within the company to complete authorization and beyond that everything else is done within the MacMessenger ecosystem. This is to ensure secrecy and protect valuable data.
+\newline
+\newline
+\textbf{Interfaces within the Overall System:}
+\newline
+\newline
+\indent The User Interface is an important aspect when it comes to what the employee sees and interacts with. The employee is presented with the front-end and is allowed to interact with it, given the certain perameters of the application. This would be the system that takes in the user inputs to provide wanted results.
+\newline
+\newline
+\indent The Messaging System is where the encryption and overall distribution of messages occurs. When the employee sends their message it enters the system, encrypted it and then sends it to the other user. The system is also responsible for communicating with the other systems to ensure the authorization of the user and the proper distribution of keys.
+\newline
+\newline
+\indent Authentication Server is where the system would connect to the business’s database to ensure that the employee is entering their correct information and if they are allowed access to the application. This entity would communicate with the Messaging System to authenticate the user.
+\newline
+\newline
+\indent The KDC Server is responsible for providing and storing the keys that would be sent to the employee. This is to ensure it helps encrypt the messages sent by the user. This will regularly be updating itself to ensure that users will always be provided with new keys to ensure security.
+\newline
+\newline
+\indent The Chat Log Database will store all the chat logs from the application. After each message is sent it is stored within the chat log database so that an authorized person has access to it when need be. This is to ensure that every chat can be accessed even after chat deletion to ensure a proper record of every company discussion within the application.
 % End SubSection
 
 \subsection{Product Functions}
@@ -467,33 +488,36 @@ The business events we will consider:
 \section{Non-Functional Requirements}
 \label{sec:non-functional_requirements}
 
+
 % Begin Section
 \subsection{Look and Feel Requirements}
 \label{sub:look_and_feel_requirements}
 % Begin SubSection
 
+
 \subsubsection{Appearance Requirements}
 \label{ssub:appearance_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{LF-A}1. ]
-	\item \emph{The application must fill to fit the screen of all Android devices.}\\
+    \item \emph{The application must fill to fit the screen of all Android devices.}\\
         {\bf Rationale:} The system will be used on a variety of different Android devices.
 \end{enumerate}
 \begin{enumerate}[{LF-A}2. ]
-	\item \emph{The application must use a minimalistic design style.}\\
-        {\bf Rationale:} A minimalistic design will allow a new user to more easily grasp the main functions of the application.	
+    \item \emph{The application must use a minimalistic design style.}\\
+        {\bf Rationale:} A minimalistic design will allow a new user to more easily grasp the main functions of the application.    
 \end{enumerate}
 \begin{enumerate}[{LF-A}3. ]
-	\item \emph{The application must not utilize overly bright or saturated colours.}\\
+    \item \emph{The application must not utilize overly bright or saturated colours.}\\
         {\bf Rationale:} Bright and oversaturated colours may be difficult to read, or make it difficult to look at the application for extended periods of time.
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Style Requirements}
 \label{ssub:style_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{LF-S}1. ]
-	\item \emph{The application must provide strong contrast between lettering and background.} \\
+    \item \emph{The application must provide strong contrast between lettering and background.} \\
         {\bf Rationale:} Strong contrast will increase readability.
 \end{enumerate}
 \begin{enumerate}[{LF-S}2. ]
@@ -502,315 +526,419 @@ The business events we will consider:
 \end{enumerate}
 
 
+
+
 % End SubSubSection
 
+
 % End SubSection
+
 
 \subsection{Usability and Humanity Requirements}
 \label{sub:usability_and_humanity_requirements}
 % Begin SubSection
 
+
 \subsubsection{Ease of Use Requirements}
 \label{ssub:ease_of_use_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{UH-EOU}1. ]
-	\item 
+    \item \emph{Buttons and similar interactive components throughout the application must be clearly labelled, unless their usage is intuitive.} \\
+    {\bf Rationale:} The main purpose of the application is for communication; thus it should not require any more knowledge than having an in-person conversation would. Many interactive components are labelled similarly throughout the variety of technologies common in the modern world, and so these can be assumed to be within the users existing knowledge base.
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Personalization and Internationalization Requirements}
 \label{ssub:personalization_and_internationalization_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{UH-PI}1. ]
-	\item \emph{International keyboards must be supported to allow messages with all global alphabets, accents, and characters.}\\
+    \item \emph{International keyboards must be supported to allow messages with all global alphabets, accents, and characters.}\\
     {\bf Rationale:} A global company using this application may have employees wishing to communicate in many different languages.
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Learning Requirements}
 \label{ssub:learning_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{UH-L}1. ]
-	\item \emph{The user must be able to understand how to use the application within the first 10 minutes of signing in.}\\
-        {\bf Rationale:} Some users may have minimal technical knowledge, and prefer a small learning curve to make usage of the app simple.
+    \item \emph{The employee must be able to understand how to use the application within the first 10 minutes of signing in.}\\
+        {\bf Rationale:} Some employees may have minimal technical knowledge and prefer a small learning curve to make usage of the app simple.
 \end{enumerate}
 % End SubSubSection
+
+
 
 
 \subsubsection{Understandability and Politeness Requirements}
 \label{ssub:understandability_and_politeness_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{UH-UP}1. ]
-	\item 
+    \item
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Accessibility Requirements}
 \label{ssub:accessibility_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{UH-A}1. ]
-	\item \emph{Text-to-speech must be provided throughout the app.}\\
+    \item \emph{Text-to-speech must be provided throughout the app.}\\
         {\bf Rationale:} Accessibility for users with limited/no vision.
 \end{enumerate}
 \begin{enumerate}[{UH-A}2. ]
-	\item \emph{The app must integrate with the native OS’s accessibility services.}\\
+    \item \emph{The app must integrate with the native OS’s accessibility services.}\\
         {\bf Rationale:} Decrease learning curve of the application by providing services the user is already familiar with.
 \end{enumerate}
 \begin{enumerate}[{UH-A}3. ]
-	\item \emph{The user must be able to increase or decrease the size of text displayed [y].}\\
+    \item \emph{The user must be able to increase or decrease the size of text displayed [y].}\\
         {\bf Rationale:} Users may have different levels of visual impairments.
 \end{enumerate}
 \begin{enumerate}[{UH-A}4. ]
-	\item \emph{The application must provide support for speech-to-text [y].}\\
+    \item \emph{The application must provide support for speech-to-text [y].}\\
         {\bf Rationale:} Accessibility for users with visual or fine-motor impairments, or similar.
 \end{enumerate}
 % End SubSubSection
 
+
 % End SubSection
+
 
 \subsection{Performance Requirements}
 \label{sub:performance_requirements}
 % Begin SubSection
 
+
 \subsubsection{Speed and Latency Requirements}
 \label{ssub:speed_and_latency_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{PR-SL}1. ]
-	\item \emph{Messages must be updated in a chat within 10ms, provided each user has a strong internet connection.}\\
-        {\bf Rationale:} Decrease latency to make communication appear instantaneous.
+    \item \emph{Messages must be updated in a chat within 10ms, provided each user has a strong internet connection.}\\
+        {\bf Rationale:} The expectation of users of most messaging apps is that messages are received as soon as they are sent, so the message sending process must appear to be instantaneous (studies show that 100ms is that maximum value perceived by humans to be instantaneous [c]).
 \end{enumerate}
 \begin{enumerate}[{PR-SL}2. ]
-	\item \emph{Application start-up time must be less than 5 seconds.}\\
-        {\bf Rationale:} Increase perceived trustworthiness of the application *COME BACK TO THIS*.
+    \item \emph{Application start-up time must be less than 5 seconds.}\\
+        {\bf Rationale:} 10 seconds is the upper limit for how long a user will keep their attention on a loading page [c].
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Safety-Critical Requirements}
 \label{ssub:safety_critical_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{PR-SC}1. ]
-	\item 
+    \item \emph{The application must include a ‘Report User’ function to notify the company of inappropriate behaviour.}\\
+    {\bf Rationale:} Any user who feels uncomfortable or threatened by another user should make the inappropriate behaviour known to their employee, to be dealt with accordingly.
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Precision or Accuracy Requirements}
 \label{ssub:precision_or_accuracy_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{PR-PA}1. ]
-	\item 
+    \item \emph{Time stamps on sent/received messages must be accurate to the minute.}\\
+    {\bf Rationale:} Showing accuracy of time to the minute is a standard across all messaging apps.
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Reliability and Availability Requirements}
 \label{ssub:reliability_and_availability_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{PR-RA}1. ]
-	\item \emph{The application must be available to users 24/7.}\\
-        {\bf Rationale:}
+    \item \emph{The application must be available to users 24/7.}\\
+        {\bf Rationale:} All messaging between employees should occur within a secure environment; continuous service of the application will eliminate any need for the user to use some other, less secure messaging application.
 \end{enumerate}
 \begin{enumerate}[{PR-RA}2. ]
-	\item \emph{The application must perform with a success rate of 95\% [z].}\\
-        {\bf Rationale:}
+    \item \emph{The application must perform with a success rate of 95\% [z].}\\
+        {\bf Rationale:} Users will be less likely to trust the application if they often experience failures and errors.
 \end{enumerate}
 \begin{enumerate}[{PR-RA}3. ]
-	\item \emph{The application must be able to recover from errors without experiencing data loss or service failures [z].}\\
-        {\bf Rationale:}
+    \item \emph{The application must be able to recover from errors without experiencing data loss or service failures [z].}\\
+        {\bf Rationale:} In the case that an error occurs the system should be able to continue from its last valid state in order to maintain the trust of its users and prevent any catastrophic data loss.
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Robustness or Fault-Tolerance Requirements}
 \label{ssub:robustness_or_fault_tolerance_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{PR-RFT}1. ]
-	\item 
+    \item \emph{The app must display accurate error messages in the case of server-side or client-side errors.}\\
+    {\bf Rationale:} The user should know why a failure in the application occurred so they can troubleshoot client-side errors or report server-side errors.
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Capacity Requirements}
 \label{ssub:capacity_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{PR-C}1. ]
-	\item 
+    \item \emph{The application must perform the same given the minimum number of employees and 5 times the total number of employees at the company.}\\
+    {\bf Rationale:} The performance of the application should not change based on the total number of users, and so the system must be prepared to handle the event where every employee is simultaneously using the application. Ensuring performance up to 5 times the expected traffic will also provide protection against DoS attacks.
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Scalability or Extensibility Requirements}
 \label{ssub:scalability_or_extensibility_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{PR-SE}1. ]
-	\item 
+    \item \emph{The application must be built on proper design principles, SOLID and follow the proper design patterns to ensure scalability of the app.}\\
+    {\bf Rationale:} The SOLID principle is designed to ensure that the application can be scalable [za].
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Longevity Requirements}
 \label{ssub:longevity_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{PR-L}1. ]
-	\item 
+    \item
 \end{enumerate}
 % End SubSubSection
 
+
 % End SubSection
+
 
 \subsection{Operational and Environmental Requirements}
 \label{sub:operational_and_environmental_requirements}
 % Begin SubSection
 
+
 \subsubsection{Expected Physical Environment}
 \label{ssub:expected_physical_environment}
 % Begin SubSubSection
 \begin{enumerate}[{OE-EPE}1. ]
-	\item 
+    \item \emph{The application must be readable in an office environment. }\\
+    {\bf Rationale:} Main usage is expected to occur during business hours in the office.
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Requirements for Interfacing with Adjacent Systems}
 \label{ssub:requirements_for_interfacing_with_adjacent_systems}
 % Begin SubSubSection
 \begin{enumerate}[{OE-IA}1. ]
-	\item 
+    \item
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Productization Requirements}
 \label{ssub:productization_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{OE-P}1. ]
-	\item 
+    \item
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Release Requirements}
 \label{ssub:release_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{OE-R}1. ]
-	\item 
+    \item \emph{The application must be compatible with Android 11.0 or above}\\
+    {\bf Rationale:} Android 10.0 and lower no longer receive security patches, increasing the risk that a device running these versions may be compromised [d].
 \end{enumerate}
 % End SubSubSection
 
+
 % End SubSection
+
 
 \subsection{Maintainability and Support Requirements}
 \label{sub:maintainability_and_support_requirements}
 % Begin SubSection
 
+
 \subsubsection{Maintenance Requirements}
 \label{ssub:maintenance_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{MS-M}1. ]
-	\item 
+    \item \emph{The system must have release bug fix updates at least once every 2 months.}\\
+    {\bf Rationale:} To maintain high standards of quality, the application must regularly undergo review and publish bug fixes as bugs are discovered.
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Supportability Requirements}
 \label{ssub:supportability_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{MS-S}1. ]
-	\item 
+    \item \emph{Messages sent using the application must support text input and attachments of any file extension.}\\
+    {\bf Rationale:} This is the team’s creative function. It will allow for an increased level of communication using the application and reduce the need for employees to communicate via some less secure third party.
+\end{enumerate}
+
+
+\begin{enumerate}[{MS-S}2. ]
+    \item \emph{The application must include a function to allow users to report bugs. }\\
+    {\bf Rationale:} Users interacting with the application should have a way to alert the developers of the application when they find bugs and unexpected/unwanted behaviours of the system.
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Adaptability Requirements}
 \label{ssub:adaptability_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{MS-A}1. ]
-	\item 
+    \item
 \end{enumerate}
 % End SubSubSection
 
+
 % End SubSection
+
 
 \subsection{Security Requirements}
 \label{sub:security_requirements}
 % Begin SubSection
 
+
 \subsubsection{Access Requirements}
 \label{ssub:access_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{SR-AC}1. ]
-	\item 
+    \item \emph{Employees must have full access to their chat history unless they have deleted it.}\\
+    {\bf Rationale:} Each user should have final say in the usage of their personal data.
+\end{enumerate}
+\begin{enumerate}[{SR-AC}2. ]
+    \item \emph{The application must have an internet connection to send or receive messages.}\\
+    {\bf Rationale:} An internet connection is required for messages to be sent and received between employees.
+\end{enumerate}
+\begin{enumerate}[{SR-AC}3. ]
+    \item \emph{Employees cannot access chat logs of any other employee.}\\
+    {\bf Rationale:} Ensure security and privacy of each individual employee.
+\end{enumerate}
+\begin{enumerate}[{SR-AC}4. ]
+    \item \emph{Employees must provide authentication to gain access to their account. }\\
+    {\bf Rationale:} Ensure only authorized individuals can gain access to a given account.
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Integrity Requirements}
 \label{ssub:integrity_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{SR-INT}1. ]
-	\item 
+    \item \emph{Nonrepudiation must be ensured over each secure messaging channel.}\\
+    {\bf Rationale:} Employees must not be able to deny that they sent a given message.
+\end{enumerate}
+\begin{enumerate}[{SR-INT}2. ]
+    \item \emph{Identity of sender and receiver must be verified over each secure messaging channel.}\\
+    {\bf Rationale:} Ensure that information being received has come from a known and trusted source.
+\end{enumerate}
+\begin{enumerate}[{SR-INT}3. ]
+    \item \emph{The physical server containing chat logs must be stored in a secure environment.}\\
+    {\bf Rationale:} Reduce probability of attacks such as side-channel attacks, i.e., using hardware to capture transmission waves.
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Privacy Requirements}
 \label{ssub:privacy_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{SR-P}1. ]
-	\item 
+    \item \emph{Stored chat logs must be encrypted using a symmetric-key cryptosystem.}\\
+    {\bf Rationale:} Ensure that chat logs of employees are kept private from unauthorized parties and are secure against known cyberattacks.
+\end{enumerate}
+\begin{enumerate}[{SR-P}2. ]
+    \item \emph{Message channels must be encrypted using a symmetric-key cryptosystem.}\\
+    {\bf Rationale:} Ensure that chats of employees are kept private from unauthorized parties and are secure against known cyberattacks.
+\end{enumerate}
+\begin{enumerate}[{SR-P}3. ]
+    \item \emph{The application must implement a Key Distribution Centre which generates all keys to be used in the secure communication session.}\\
+    {\bf Rationale:} Use of a Key Distribution Centre will ensure only authorized employees can access and use the application.
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Audit Requirements}
 \label{ssub:audit_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{SR-AU}1. ]
-	\item 
+    \item \emph{All security measures utilized in the application must adhere to NIST standards.}\\
+    {\bf Rationale:} The National Institute of Standards and Technology (NIST) has developed a comprehensive set of guidelines according to American statutes and laws [a]. NIST standards are upheld worldwide despite being an American institute.
+\end{enumerate}
+\begin{enumerate}[{SR-AU}2. ]
+    \item \emph{The application must pass penetration testing [x]. }\\
+    {\bf Rationale:} A penetration test will simulate a cyberattack and ensure the security of the application.
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Immunity Requirements}
 \label{ssub:immunity_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{SR-IM}1. ]
-	\item 
+    \item
 \end{enumerate}
 % End SubSubSection
 
+
 % End SubSection
+
 
 \subsection{Cultural and Political Requirements}
 \label{sub:cultural_and_political_requirements}
 % Begin SubSection
 
+
 \subsubsection{Cultural Requirements}
 \label{ssub:cultural_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{CP-C}1. ]
-	\item 
+    \item \emph{The application shall not use any offensive imagery.}\\
+    {\bf Rationale:} Employees should feel comfortable and safe when using the application to ensure satisfaction with the product.
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Political Requirements}
 \label{ssub:political_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{CP-P}1. ]
-	\item 
+    \item
 \end{enumerate}
 % End SubSubSection
 
+
 % End SubSection
+
 
 \subsection{Legal Requirements}
 \label{sub:legal_requirements}
 % Begin SubSection
 
+
 \subsubsection{Compliance Requirements}
 \label{ssub:compliance_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{LR-COMP}1. ]
-	\item 
+    \item \emph{The application will follow all regional laws relating to the collection, usage, and disclosure of the personal information of its users.}\\
+    {\bf Rationale:} All public institutions in Ontario are required by law to protect the information of their users and follow strict rules in the case any personal information must be disclosed to an outside party [b].
 \end{enumerate}
 % End SubSubSection
+
 
 \subsubsection{Standards Requirements}
 \label{ssub:standards_requirements}
 % Begin SubSubSection
 \begin{enumerate}[{LR-STD}1. ]
-	\item 
+    \item \emph{The app should store any sensitive company chatlogs into an internal database.}\\
+    {\bf Rationale:} Standard app quality of application with consideration to the privacy and security of sensitive information [e]
 \end{enumerate}
 % End SubSubSection
 
+
 % End SubSection
 
+
 % End Section
+
 
 \appendix
 \section{Division of Labour}

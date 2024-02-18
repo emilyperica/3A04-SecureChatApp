@@ -103,10 +103,15 @@ The goal of this software is to promote safe communication means between employe
 \label{sub:references}
 % Begin SubSection
 \begin{itemize}
-	\item Provide a complete list of all documents referenced elsewhere in the SRS.
-	\item Identify each document by title, report number (if applicable), date, and publishing organization.
-	\item Specify the sources from which the references can be obtained.
-	\item Order this list in some sensible manner (alphabetical by author, or something else that makes more sense).
+	\item [1] Gillis, A. (2022, June). What is a security audit? TechTarget. https://www.techtarget.com/searchcio/definition/security-audit 
+	\item [2] Make Google Messages more accessible - Google Messages. (n.d.). Support.google.com. https://support.google.com/messages/answer/6105764?hl=en 
+	\item [3] Non-functional Requirements: Examples, Types, How to Approach. (2022, July 26). AltexSoft. https://www.altexsoft.com/blog/non-functional-requirements/
+    \item [4] Understanding SOLID Principles and Clean Architecture. (n.d.). Www.yourteaminindia.com. Retrieved February 18, 2024, from https://www.yourteaminindia.com/blog/understanding-solid-principles-and-clean-architecture#:~:text=Architecture 
+    \item [5] NIST. (2022, July 21). NIST Cybersecurity & Privacy Program [Review of NIST Cybersecurity & Privacy Program].https://www.nist.gov/system/files/documents/2022/07/21/Extended%20Cybersecurity%20Vitals%20Fact%20Sheet.pdf 
+    \item [6] frank@v51.com. (2019). Your privacy rights - IPC. IPC. https://www.ipc.on.ca/privacy-individuals/your-privacy-rights/ 
+    \item [7] Wang, Y., Huang, Y., Li, J., & Zhang, J. (2021). The effect of mobile applications’ initial loading pages on users’ mental state and behavior. Displays, 68, 102007. https://doi.org/10.1016/j.displa.2021.102007 
+    \item [8] Android OS. (n.d.). Endoflife.date. https://endoflife.date/android 
+    \item [9] Core app quality. (n.d.). Android Developers. https://developer.android.com/docs/quality-guidelines/core-app-quality
 \end{itemize}
 % End SubSection
 
@@ -592,11 +597,11 @@ The business events we will consider:
         {\bf Rationale:} Decrease learning curve of the application by providing services the user is already familiar with.
 \end{enumerate}
 \begin{enumerate}[{UH-A}3. ]
-    \item \emph{The user must be able to increase or decrease the size of text displayed [y].}\\
+    \item \emph{The user must be able to increase or decrease the size of text displayed [2].}\\
         {\bf Rationale:} Users may have different levels of visual impairments.
 \end{enumerate}
 \begin{enumerate}[{UH-A}4. ]
-    \item \emph{The application must provide support for speech-to-text [y].}\\
+    \item \emph{The application must provide support for speech-to-text [2].}\\
         {\bf Rationale:} Accessibility for users with visual or fine-motor impairments, or similar.
 \end{enumerate}
 % End SubSubSection
@@ -615,11 +620,11 @@ The business events we will consider:
 % Begin SubSubSection
 \begin{enumerate}[{PR-SL}1. ]
     \item \emph{Messages must be updated in a chat within 10ms, provided each user has a strong internet connection.}\\
-        {\bf Rationale:} The expectation of users of most messaging apps is that messages are received as soon as they are sent, so the message sending process must appear to be instantaneous (studies show that 100ms is that maximum value perceived by humans to be instantaneous [c]).
+        {\bf Rationale:} The expectation of users of most messaging apps is that messages are received as soon as they are sent, so the message sending process must appear to be instantaneous (studies show that 100ms is that maximum value perceived by humans to be instantaneous [7]).
 \end{enumerate}
 \begin{enumerate}[{PR-SL}2. ]
     \item \emph{Application start-up time must be less than 5 seconds.}\\
-        {\bf Rationale:} 10 seconds is the upper limit for how long a user will keep their attention on a loading page [c].
+        {\bf Rationale:} 10 seconds is the upper limit for how long a user will keep their attention on a loading page [7].
 \end{enumerate}
 % End SubSubSection
 
@@ -652,11 +657,11 @@ The business events we will consider:
         {\bf Rationale:} All messaging between employees should occur within a secure environment; continuous service of the application will eliminate any need for the user to use some other, less secure messaging application.
 \end{enumerate}
 \begin{enumerate}[{PR-RA}2. ]
-    \item \emph{The application must perform with a success rate of 95\% [z].}\\
+    \item \emph{The application must perform with a success rate of 95\% [3].}\\
         {\bf Rationale:} Users will be less likely to trust the application if they often experience failures and errors.
 \end{enumerate}
 \begin{enumerate}[{PR-RA}3. ]
-    \item \emph{The application must be able to recover from errors without experiencing data loss or service failures [z].}\\
+    \item \emph{The application must be able to recover from errors without experiencing data loss or service failures [3].}\\
         {\bf Rationale:} In the case that an error occurs the system should be able to continue from its last valid state in order to maintain the trust of its users and prevent any catastrophic data loss.
 \end{enumerate}
 % End SubSubSection
@@ -687,7 +692,7 @@ The business events we will consider:
 % Begin SubSubSection
 \begin{enumerate}[{PR-SE}1. ]
     \item \emph{The application must be built on proper design principles, SOLID and follow the proper design patterns to ensure scalability of the app.}\\
-    {\bf Rationale:} The SOLID principle is designed to ensure that the application can be scalable [za].
+    {\bf Rationale:} The SOLID principle is designed to ensure that the application can be scalable [4].
 \end{enumerate}
 % End SubSubSection
 
@@ -742,7 +747,7 @@ The business events we will consider:
 % Begin SubSubSection
 \begin{enumerate}[{OE-R}1. ]
     \item \emph{The application must be compatible with Android 11.0 or above}\\
-    {\bf Rationale:} Android 10.0 and lower no longer receive security patches, increasing the risk that a device running these versions may be compromised [d].
+    {\bf Rationale:} Android 10.0 and lower no longer receive security patches, increasing the risk that a device running these versions may be compromised [8].
 \end{enumerate}
 % End SubSubSection
 
@@ -861,10 +866,10 @@ The business events we will consider:
 % Begin SubSubSection
 \begin{enumerate}[{SR-AU}1. ]
     \item \emph{All security measures utilized in the application must adhere to NIST standards.}\\
-    {\bf Rationale:} The National Institute of Standards and Technology (NIST) has developed a comprehensive set of guidelines according to American statutes and laws [a]. NIST standards are upheld worldwide despite being an American institute.
+    {\bf Rationale:} The National Institute of Standards and Technology (NIST) has developed a comprehensive set of guidelines according to American statutes and laws [5]. NIST standards are upheld worldwide despite being an American institute.
 \end{enumerate}
 \begin{enumerate}[{SR-AU}2. ]
-    \item \emph{The application must pass penetration testing [x]. }\\
+    \item \emph{The application must pass penetration testing [1]. }\\
     {\bf Rationale:} A penetration test will simulate a cyberattack and ensure the security of the application.
 \end{enumerate}
 % End SubSubSection
@@ -919,7 +924,7 @@ The business events we will consider:
 % Begin SubSubSection
 \begin{enumerate}[{LR-COMP}1. ]
     \item \emph{The application will follow all regional laws relating to the collection, usage, and disclosure of the personal information of its users.}\\
-    {\bf Rationale:} All public institutions in Ontario are required by law to protect the information of their users and follow strict rules in the case any personal information must be disclosed to an outside party [b].
+    {\bf Rationale:} All public institutions in Ontario are required by law to protect the information of their users and follow strict rules in the case any personal information must be disclosed to an outside party [6].
 \end{enumerate}
 % End SubSubSection
 
@@ -929,7 +934,7 @@ The business events we will consider:
 % Begin SubSubSection
 \begin{enumerate}[{LR-STD}1. ]
     \item \emph{The app should store any sensitive company chatlogs into an internal database.}\\
-    {\bf Rationale:} Standard app quality of application with consideration to the privacy and security of sensitive information [e]
+    {\bf Rationale:} Standard app quality of application with consideration to the privacy and security of sensitive information [9]
 \end{enumerate}
 % End SubSubSection
 

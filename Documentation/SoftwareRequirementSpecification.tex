@@ -481,9 +481,9 @@ The business events we will consider:
 			\begin{enumerate}
    				\item[7i.2i.1] Employee connects with Tech Support
        				\item[7i.2i.2] System direct the employee to Tech Support
+	   		\end{enumerate}
 	   		\item[7i.3]Employee choose to re-send the file
     			\item[7i.4] Return to BE7. VP1. Step 6
-       			\begin{enumerate}
                     \end{enumerate}
                     \item[8i.] Server failed to store the chat log.
                     \begin{enumerate}
@@ -491,7 +491,79 @@ The business events we will consider:
                         \item[8i.2] System receives the error while storing the chat log, and auto-creates a bug ticket for Customer Support. (Out of scope).
                     \end{enumerate}
                 \end{enumerate}
+\end{enumerate}
 
+
+
+\begin{enumerate}[{\bf BE8.}]
+	\item Accessing chat log \\
+        \textbf{Pre-condition:} There is at least one chat log stored on the server. Server is not under maintenance. 
+		\begin{enumerate}[{\bf VP1.}]
+			\item Employee \\
+   				N/A
+		  \item Administrator \\
+		\textbf{Main Success Scenario:}
+                \begin{enumerate}[{  1.}]
+                    \item Administrator authenticates and logs in to the server. 
+		    \item System recognizes the Administrator’s identity and allows access.  
+                    \item System displays all chat logs as text files in chronological order. 
+                    \item Administrator searches for the desired chat logs and opens it. 
+                    \item System displays the chat log content.  
+                \end{enumerate}
+                \textbf{Secondary Scenario:}
+                \begin{enumerate}
+		    \item[2i.] System didn’t recognize Administrator’s identity
+                    \begin{enumerate}
+                        \item[2i.1] System didn’t recognize Administrator’s identity
+                        \item[2i.2] Accessing chat log failed
+                    \end{enumerate}
+                    \item[4i.]  Error occurred when storing chat log, Administrator did not find the desired chat log
+                    \begin{enumerate}
+                        \item[4i.1] Administrator did not find the desired chat log
+                        \item[4i.2] Accessing chat log failed
+                    \end{enumerate}
+                \end{enumerate}
+            \item Customer support \\
+	            N/A
+            \item Maintenance \\
+	            \begin{enumerate}
+                        \item[4i] Administrator report the missing chat log to Maintenance team. (Out of scope)
+                    \end{enumerate}
+            \item Cybersecurity \\
+            	\begin{enumerate}
+                        \item[2i] Administrator reports the issue with authentication to Cyber security team. (Out of scope)
+                \end{enumerate}
+            \item Management \\
+            N/A \\
+		\end{enumerate}
+		{\bf Global Scenario:}\\
+        \begin{enumerate}[{  }]
+            \item \textbf{Precondition:} There is at least one chat log stored on the server. Server is not under maintenance.
+            \item \textbf{Main Success Scenario:}
+            \begin{enumerate}[{  1.}]
+                    \item Administrator authenticates and logs in to the server. 
+		    \item System recognizes the Administrator’s identity and allows access.  
+                    \item System displays all chat logs as text files in chronological order. 
+                    \item Administrator searches for the desired chat logs and opens it. 
+                    \item System displays the chat log content.  
+            \end{enumerate}
+        \end{enumerate}
+	        \textbf{Secondary Scenario:}
+                \begin{enumerate}
+		
+                    \item[2i.] System didn’t recognize Administrator’s identity 
+                    \begin{enumerate}
+                        \item[2i.1] System didn’t recognize Administrator’s identity
+                        \item[2i.2] Administrator reports the issue with authentication to Cyber security team. (Out of scope)
+                    \end{enumerate}
+		    
+                    \item[4i.] Error occurred when storing chat log, Administrator did not find the desired chat log 
+                    \begin{enumerate}
+                        \item[4i.1] Administrator did not find the desired chat log 
+                        \item[4i.2] Administrator report the missing chat log to Maintenance team. (Out of scope)
+                    \end{enumerate}
+                \end{enumerate}
+\end{enumerate}
 %	Below, we organize by Business Event.
 %	\begin{enumerate}[{BE}1.]
 %		\item Business Event name

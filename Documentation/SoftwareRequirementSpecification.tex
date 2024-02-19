@@ -161,6 +161,11 @@
 \newline
 \newline
 \indent The Chat Log Database will store all the chat logs from the application. After each message is sent it is stored within the chat log database so that an authorized person has access to it when need be. This is to ensure that every chat can be accessed even after chat deletion to ensure a proper record of every company discussion within the application.
+\newline
+\begin{center}
+    \includegraphics{Graphics/blockdiagram.png}\\
+    \emph{Figure 1: Block diagram for different systems involved}
+\end{center}
 % End SubSection
 
 \subsection{Product Functions}
@@ -240,12 +245,14 @@ User group 1: Interns (Primary stakeholder)
 \label{sub:assumptions_and_dependencies}
 % Begin SubSection
 \begin{itemize}
-	\item List any assumptions you made in interpreting what the software being developed is aiming to achieve
 	\item The software will only be provided on company-issued Android devices. Not supported on other devices in the market.
     \item Devices will have stable connection to the Internet during communication. 
+    \item Assume that only employees within the company will use the software. 
+    \item Assume there is no limitation on the number of people in a group chat.  
+    \item The software shall function on the latest release of the Android operating system. 
+    \item Assume that the key generated in one session can be used for an unlimited number of chats. 
     \item It is assumed that the server for storing chat history logs will be provided, and will always have sufficient storage space for chat logs. 
     \item It is assumed that there is a database for storing existing employee names/passwords
-    \item It is assumed that there is no restriction on what types of authentication protocols and cryptosystem that will be implemented in the software (? More like constraints?)
     \item The software will only be used within Canada.
 
 \end{itemize}
@@ -263,7 +270,7 @@ User group 1: Interns (Primary stakeholder)
 % Begin Section
 \begin{center}
     \includegraphics{Graphics/usecaseBetter.png}\\
-    \emph{Figure 2: Use Case diagram for Sending a Message}
+    \emph{Figure 3: Use Case diagram for Sending a Message}
 \end{center}
 
 \hspace{5mm}Sending Message is the business event that the use case diagram represents. The use case diagram is to highlight how the employee would go about sending a secure message through the application. So, the user will login in, then select the chat room and send the message. There are also some secondary scenarios covered like if the login is denied. This is to cover the main possibilities within the sending business events.
@@ -643,17 +650,17 @@ The business events we will consider:
                     \item[4i.] Employee unable to authenticate with the generated key 
                     \begin{enumerate}
                         \item[4i.1] Employee unable to authenticate with the generated key.
-                        \item[4i.2] Sending file failed.
+                        \item[4i.2] Sending file fails.
                     \end{enumerate}
                     \item[5i.] Employee added a file exceeding the maximum size limit.
                     \begin{enumerate}
-                        \item[5i.1] Employee added a file exceeding the maximum size limit.
-                        \item[5i.2] Attaching file failed.
+                        \item[5i.1] Employee adds a file exceeding the maximum size limit.
+                        \item[5i.2] Attaching file fails.
                     \end{enumerate}
-                    \item[7i.] Employee saw the file sent was failed
+                    \item[7i.] Employee saw the file sent was fails
                     \begin{enumerate}
-                        \item[7i.1] Employee saw the file was failed to send over
-                        \item[7i.2] Sending file failed
+                        \item[7i.1] Employee sees the file fails to send over
+                        \item[7i.2] Sending file fails
                     \end{enumerate}
                 \end{enumerate}
 		  \item Administrator \\
@@ -687,7 +694,195 @@ The business events we will consider:
                     \item Employee quits the chat interface.
             \end{enumerate}
         \end{enumerate}
+	        \textbf{Secondary Scenario:}
+                \begin{enumerate}
+                    \item[4i.] Employee unable to authenticate with the generated key. 
+                    \begin{enumerate}
+                        \item[4i.1] Employee unable to authenticate with the generated key.
+                        \item[4i.2] System prompts the employee to re-try or connect with Customer Support 
+                    \end{enumerate}
+                    \item[5i.] Employee adds a file exceeding the maximum size limit. 
+                    \begin{enumerate}
+                        \item[5i.1] Employee adds a file exceeding the maximum size limit. 
+                        \item[5i.2] Attaching file fails.
+                    \end{enumerate}
+                    \item[7i.] Employee saw the file sent was fails
+                    \begin{enumerate}
+                        \item[7i.1] Employee saw the file sent was fails
+                        \item[7i.2] System gives the employee two choices, either re-send or suggests to connect with Tech Support. 
+			\begin{enumerate}
+   				\item[7i.2i.1] Employee connects with Tech Support
+       				\item[7i.2i.2] System directs the employee to Tech Support
+	   		\end{enumerate}
+	   		\item[7i.3]Employee chooses to re-send the file
+    			\item[7i.4] Return to BE7. VP1. Step 6
+                    \end{enumerate}
+                    \item[8i.] Server fails to store the chat log.
+                    \begin{enumerate}
+                        \item[8i.1] Server fails to store the chat log.
+                        \item[8i.2] System receives the error while storing the chat log, and auto-creates a bug ticket for Customer Support. (Out of scope).
+                    \end{enumerate}
+                \end{enumerate}
+\end{enumerate}
 
+
+
+\begin{enumerate}[{\bf BE8.}]
+	\item Accessing chat log \\
+        \textbf{Pre-condition:} There is at least one chat log stored on the server. Server is not under maintenance. 
+		\begin{enumerate}[{\bf VP1.}]
+			\item Employee \\
+   				N/A
+		  \item Administrator \\
+		\textbf{Main Success Scenario:}
+                \begin{enumerate}[{  1.}]
+                    \item Administrator authenticates and logs in to the server. 
+		    \item System recognizes the Administrator’s identity and allows access.  
+                    \item System displays all chat logs as text files in chronological order. 
+                    \item Administrator searches for the desired chat logs and opens it. 
+                    \item System displays the chat log content.  
+                \end{enumerate}
+                \textbf{Secondary Scenario:}
+                \begin{enumerate}
+		    \item[2i.] System does not recognize Administrator’s identity
+                    \begin{enumerate}
+                        \item[2i.1] System does not recognize Administrator’s identity
+                        \item[2i.2] Accessing chat log failed
+                    \end{enumerate}
+                    \item[4i.]  Error occurs when storing chat log, Administrator did not find the desired chat log
+                    \begin{enumerate}
+                        \item[4i.1] Administrator does not find the desired chat log
+                        \item[4i.2] Accessing chat log fails
+                    \end{enumerate}
+                \end{enumerate}
+            \item Customer support \\
+	            N/A
+            \item Maintenance \\
+	            \begin{enumerate}
+                        \item[4i] Administrator reports the missing chat log to Maintenance team. (Out of scope)
+                    \end{enumerate}
+            \item Cybersecurity \\
+            	\begin{enumerate}
+                        \item[2i] Administrator reports the issue with authentication to Cyber security team. (Out of scope)
+                \end{enumerate}
+            \item Management \\
+            N/A \\
+		\end{enumerate}
+		{\bf Global Scenario:}\\
+        \begin{enumerate}[{  }]
+            \item \textbf{Precondition:} There is at least one chat log stored on the server. Server is not under maintenance.
+            \item \textbf{Main Success Scenario:}
+            \begin{enumerate}[{  1.}]
+                    \item Administrator authenticates and logs in to the server. 
+		    \item System recognizes the Administrator’s identity and allows access.  
+                    \item System displays all chat logs as text files in chronological order. 
+                    \item Administrator searches for the desired chat logs and opens it. 
+                    \item System displays the chat log content.  
+            \end{enumerate}
+        \end{enumerate}
+	        \textbf{Secondary Scenario:}
+                \begin{enumerate}
+		
+                    \item[2i.] System does not recognize Administrator’s identity 
+                    \begin{enumerate}
+                        \item[2i.1] System does not recognize Administrator’s identity
+                        \item[2i.2] Administrator reports the issue with authentication to Cyber security team. (Out of scope)
+                    \end{enumerate}
+		    
+                    \item[4i.] Error occurs when storing chat log, Administrator did not find the desired chat log 
+                    \begin{enumerate}
+                        \item[4i.1] Administrator does not find the desired chat log 
+                        \item[4i.2] Administrator reports the missing chat log to Maintenance team. (Out of scope)
+                    \end{enumerate}
+                \end{enumerate}
+\end{enumerate}
+
+\begin{enumerate}[{\bf BE9.}]
+	\item Fetching and updating key \\
+        \textbf{Pre-condition:} Employee hasn’t fetched any key(s), and hasn’t entered any other keys yet, and has login the application.   
+		\begin{enumerate}[{\bf VP1.}]
+			\item Employee \\
+   				\textbf{Main Success Scenario:}
+                \begin{enumerate}[{  1.}]
+                    \item Employee fetches a key from the KDC 
+		    \item System displays a key was fetched successfully and auto-copy the key to employee’s clipboard,  
+		    \item System displays a ‘Enter key’ page  
+		    \item Employee pastes the key 
+                    \item System authenticates the key, and display the chat interface 
+		    \item Employee begins chatting 
+                    \item Key expired after one session, system notifies the Employee to update Key. (return to step 1)  
+                \end{enumerate}
+                \textbf{Secondary Scenario:}
+                \begin{enumerate}
+		    \item[2i.] System displays that an error occurred when fetching the key.
+                    \begin{enumerate}
+                        \item[2i.1] System displays that an error occurred when fetching the key.
+                        \item[2i.2] Fetching a key fails
+                    \end{enumerate}
+                    \item[5i.]  Authentication of the key fails for some reason.  
+                    \begin{enumerate}
+                        \item[5i.1] Authentication of the key fails.
+                        \item[5i.2] Entering a key fails
+                    \end{enumerate}
+		    \item[7i.]  System does not notify the Employee of expired key
+                    \begin{enumerate}
+                        \item[7i.1] System does not notify the Employee of expired key
+                        \item[7i.2] Authentication of the key fails.
+			\item[7i.3] Updating the key fails
+                    \end{enumerate}
+                \end{enumerate}
+		  \item Administrator \\
+			N/A
+            \item Customer support \\
+	           \begin{enumerate}
+                        \item[2i.] System prompts the employee to try again or connect with Tech Support
+                        \item[5i.] System displays a ‘report’ button that prompts the employee to report the incident to Cyber Security Team 
+                    \end{enumerate}
+            \item Maintenance \\
+	            N/A
+            \item Cybersecurity \\
+            	\begin{enumerate}
+                        \item[5i.] System auto-creates an incident ticket for Cyber security team (Out of scope)
+                \end{enumerate}
+            \item Management \\
+            N/A \\
+		\end{enumerate}
+		{\bf Global Scenario:}\\
+        \begin{enumerate}[{  }]
+            \item \textbf{Precondition:} Employee hasn’t fetched any key(s), and hasn’t entered any other keys yet, and has login the software 
+            \item \textbf{Main Success Scenario:}
+            \begin{enumerate}[{  1.}]
+                    \item Employee fetches a key from the KDC 
+		    \item System displays a key was fetched successfully and auto-copy the key to employee’s clipboard,  
+		    \item System displays a ‘Enter key’ page  
+		    \item Employee pastes the key 
+                    \item System authenticates the key, and display the chat interface 
+		    \item Employee begins chatting 
+                    \item Key expires after one session, system notifies the Employee to update Key. (return to step 1)   
+            \end{enumerate}
+        \end{enumerate}
+	        \textbf{Secondary Scenario:}
+                \begin{enumerate}
+		
+                    \item[2i.] System displays that an error occurred when fetching the key. 
+                    \begin{enumerate}
+                        \item[2i.1] System displays that an error occurred when fetching the key. 
+                        \item[2i.2] System prompts the employee to try again or connect with Tech Support
+                    \end{enumerate}
+		    
+                    \item[5i.] Authentication of the key fails for some reason.
+                    \begin{enumerate}
+                        \item[5i.1] System displays a ‘report’ button that prompts the employee to report the incident to Cyber Security Team
+                        \item[5i.2] System auto creates an incident ticket for Cyber security team (Out of scope) 
+                    \end{enumerate}
+		    \item[7i.]  System does not notify the Employee of expired key
+                    \begin{enumerate}
+                        \item[7i.1] System does not notify the Employee of expired key
+                        \item[7i.2] Authentication of the key fails.
+			\item[7i.3] Updating the key fails
+                    \end{enumerate}
+                \end{enumerate}
+\end{enumerate}
 %	Below, we organize by Business Event.
 %	\begin{enumerate}[{BE}1.]
 %		\item Business Event name
@@ -888,7 +1083,7 @@ The business events we will consider:
 \subsubsection{Understandability and Politeness Requirements}
 \label{ssub:understandability_and_politeness_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{N/A} ]
+\begin{enumerate}[{NA} ]
     \item
 \end{enumerate}
 % End SubSubSection
@@ -1009,7 +1204,7 @@ The business events we will consider:
 \subsubsection{Longevity Requirements}
 \label{ssub:longevity_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{N/A}]
+\begin{enumerate}[{NA}]
     \item
 \end{enumerate}
 % End SubSubSection
@@ -1036,7 +1231,7 @@ The business events we will consider:
 \subsubsection{Requirements for Interfacing with Adjacent Systems}
 \label{ssub:requirements_for_interfacing_with_adjacent_systems}
 % Begin SubSubSection
-\begin{enumerate}[{N/A}]
+\begin{enumerate}[{NA}]
     \item 
 \end{enumerate}
 % End SubSubSection
@@ -1045,7 +1240,7 @@ The business events we will consider:
 \subsubsection{Productization Requirements}
 \label{ssub:productization_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{N/A}]
+\begin{enumerate}[{NA}]
     \item
 \end{enumerate}
 % End SubSubSection
@@ -1098,7 +1293,7 @@ The business events we will consider:
 \subsubsection{Adaptability Requirements}
 \label{ssub:adaptability_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{N/A}]
+\begin{enumerate}[{NA}]
     \item
 \end{enumerate}
 % End SubSubSection
@@ -1187,7 +1382,7 @@ The business events we will consider:
 \subsubsection{Immunity Requirements}
 \label{ssub:immunity_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{N/A}]
+\begin{enumerate}[{NA}]
     \item
 \end{enumerate}
 % End SubSubSection
@@ -1214,7 +1409,7 @@ The business events we will consider:
 \subsubsection{Political Requirements}
 \label{ssub:political_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{N/A}]
+\begin{enumerate}[{NA}]
     \item 
 \end{enumerate}
 % End SubSubSection

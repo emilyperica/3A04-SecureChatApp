@@ -564,6 +564,93 @@ The business events we will consider:
                     \end{enumerate}
                 \end{enumerate}
 \end{enumerate}
+
+\begin{enumerate}[{\bf BE9.}]
+	\item Fetching and updating key \\
+        \textbf{Pre-condition:} Employee hasn’t fetched any key(s), and hasn’t entered any other keys yet, and has login the application.   
+		\begin{enumerate}[{\bf VP1.}]
+			\item Employee \\
+   				\textbf{Main Success Scenario:}
+                \begin{enumerate}[{  1.}]
+                    \item Employee fetches a key from the KDC 
+		    \item System displays a key was fetched successfully and auto-copy the key to employee’s clipboard,  
+		    \item System displays a ‘Enter key’ page  
+		    \item Employee pastes the key 
+                    \item System authenticates the key, and display the chat interface 
+		    \item Employee begins chatting 
+                    \item Key expired after one session, system notifies the Employee to update Key. (return to step 1)  
+                \end{enumerate}
+                \textbf{Secondary Scenario:}
+                \begin{enumerate}
+		    \item[2i.] System displayed that an error occurred when fetching the key.
+                    \begin{enumerate}
+                        \item[2i.1] System displayed that an error occurred when fetching the key.
+                        \item[2i.2] Fetching a key failed
+                    \end{enumerate}
+                    \item[5i.]  Authentication of the key failed for some reason.  
+                    \begin{enumerate}
+                        \item[5i.1] Authentication of the key failed.
+                        \item[5i.2] Entering a key failed
+                    \end{enumerate}
+		    \item[7i.]  System did not notify the Employee of expired key
+                    \begin{enumerate}
+                        \item[7i.1] System did not notify the Employee of expired key
+                        \item[7i.2] Authentication of the key failed.
+			\item[7i.3] Updating the key failed
+                    \end{enumerate}
+                \end{enumerate}
+		  \item Administrator \\
+			N/A
+            \item Customer support \\
+	           \begin{enumerate}
+                        \item[2i.] System prompts the employee to try again or connect with Tech Support
+                        \item[5i.] System displays a ‘report’ button that prompts the employee to report the incident to Cyber Security Team 
+                    \end{enumerate}
+            \item Maintenance \\
+	            N/A
+            \item Cybersecurity \\
+            	\begin{enumerate}
+                        \item[5i.] System auto creates an incident ticket for Cyber security team (Out of scope)
+                \end{enumerate}
+            \item Management \\
+            N/A \\
+		\end{enumerate}
+		{\bf Global Scenario:}\\
+        \begin{enumerate}[{  }]
+            \item \textbf{Precondition:} Employee hasn’t fetched any key(s), and hasn’t entered any other keys yet, and has login the software 
+            \item \textbf{Main Success Scenario:}
+            \begin{enumerate}[{  1.}]
+                    \item Employee fetches a key from the KDC 
+		    \item System displays a key was fetched successfully and auto-copy the key to employee’s clipboard,  
+		    \item System displays a ‘Enter key’ page  
+		    \item Employee pastes the key 
+                    \item System authenticates the key, and display the chat interface 
+		    \item Employee begins chatting 
+                    \item Key expired after one session, system notifies the Employee to update Key. (return to step 1)   
+            \end{enumerate}
+        \end{enumerate}
+	        \textbf{Secondary Scenario:}
+                \begin{enumerate}
+		
+                    \item[2i.] System displayed that an error occurred when fetching the key. 
+                    \begin{enumerate}
+                        \item[2i.1] System displayed that an error occurred when fetching the key. 
+                        \item[2i.2] System prompts the employee to try again or connect with Tech Support
+                    \end{enumerate}
+		    
+                    \item[5i.] Authentication of the key failed for some reason.
+                    \begin{enumerate}
+                        \item[5i.1] System displays a ‘report’ button that prompts the employee to report the incident to Cyber Security Team
+                        \item[5i.2] System auto creates an incident ticket for Cyber security team (Out of scope) 
+                    \end{enumerate}
+		    \item[7i.]  System did not notify the Employee of expired key
+                    \begin{enumerate}
+                        \item[7i.1] System did not notify the Employee of expired key
+                        \item[7i.2] Authentication of the key failed.
+			\item[7i.3] Updating the key failed
+                    \end{enumerate}
+                \end{enumerate}
+\end{enumerate}
 %	Below, we organize by Business Event.
 %	\begin{enumerate}[{BE}1.]
 %		\item Business Event name

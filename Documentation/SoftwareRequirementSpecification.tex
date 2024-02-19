@@ -214,12 +214,14 @@ User group 1: Interns (Primary stakeholder)
 \label{sub:assumptions_and_dependencies}
 % Begin SubSection
 \begin{itemize}
-	\item List any assumptions you made in interpreting what the software being developed is aiming to achieve
 	\item The software will only be provided on company-issued Android devices. Not supported on other devices in the market.
     \item Devices will have stable connection to the Internet during communication. 
+    \item Assume that only employees within the company will use the software. 
+    \item Assume there is no limitation on the number of people in a group chat.  
+    \item The software shall function on the latest release of the Android operating system. 
+    \item Assume that the key generated in one session can be used for an unlimited number of chats. 
     \item It is assumed that the server for storing chat history logs will be provided, and will always have sufficient storage space for chat logs. 
     \item It is assumed that there is a database for storing existing employee names/passwords
-    \item It is assumed that there is no restriction on what types of authentication protocols and cryptosystem that will be implemented in the software (? More like constraints?)
     \item The software will only be used within Canada.
 
 \end{itemize}
@@ -460,6 +462,35 @@ The business events we will consider:
                     \item Employee quits the chat interface.
             \end{enumerate}
         \end{enumerate}
+	        \textbf{Secondary Scenario:}
+                \begin{enumerate}
+                    \item[4i.] Employee unable to authenticate with the generated key. 
+                    \begin{enumerate}
+                        \item[4i.1] Employee unable to authenticate with the generated key.
+                        \item[4i.2] System prompts the employee to re-try or connect with Customer Support 
+                    \end{enumerate}
+                    \item[5i.] Employee added a file exceeding the maximum size limit. 
+                    \begin{enumerate}
+                        \item[5i.1] Employee added a file exceeding the maximum size limit. 
+                        \item[5i.2] Attaching file failed.
+                    \end{enumerate}
+                    \item[7i.] Employee saw the file sent was failed 
+                    \begin{enumerate}
+                        \item[7i.1] Employee saw the file sent was failed
+                        \item[7i.2] System gives the employee two choices, either re-send or suggests to connect with Tech Support. 
+			\begin{enumerate}
+   				\item[7i.2i.1] Employee connects with Tech Support
+       				\item[7i.2i.2] System direct the employee to Tech Support
+	   		\item[7i.3]Employee choose to re-send the file
+    			\item[7i.4] Return to BE7. VP1. Step 6
+       			\begin{enumerate}
+                    \end{enumerate}
+                    \item[8i.] Server failed to store the chat log.
+                    \begin{enumerate}
+                        \item[8i.1] Server failed to store the chat log.
+                        \item[8i.2] System receives the error while storing the chat log, and auto-creates a bug ticket for Customer Support. (Out of scope).
+                    \end{enumerate}
+                \end{enumerate}
 
 %	Below, we organize by Business Event.
 %	\begin{enumerate}[{BE}1.]

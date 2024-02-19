@@ -166,7 +166,33 @@
 \subsection{Product Functions}
 \label{sub:product_functions}
 % Begin SubSection
-tbd.\\
+\hspace{5mm}The software will ensure secure connection and communication between employees by generating a key only for those who are authorized using a mediated authentication protocol. The key is generated and contained within a KDC server which frequently updates the authorized communicating agents’ keys. Messages between communicating agents will be encrypted and decrypted using a symmetric-key crypto-system and stored securely on the server, including complete chat logs, communicating agent identifiers and date/time. 
+\newline
+\newline
+\textbf{Security:}
+\begin{itemize}
+\item Access to the chat application is verified by an authentication process which authorizes each employee individually 
+\item Every employee’s access to the chat application is controlled by a server that gives access only to those authorized in the form of a key  
+\item The server will frequently update and ensure that each registered employee is connected securely by providing a new key 
+\item The application will encrypt every outgoing message and decrypts every incoming message using an algorithm 
+\end{itemize}
+\textbf{Database:}   
+\begin{itemize}
+\item Detailed information including an accurate chat log along with the identifier of the employees and the messages’ time and date will be securely stored. 
+\item All attached files that are sent will be securely stored 
+\end{itemize}
+\textbf{User Interaction:}  
+\begin{itemize}
+\item Employees can create and communicate in group chats for secure communication between departments or teams. 
+\item Employees can securely reset their password through the company provided email to regain access to their account 
+\item Employees can send and receive files while the application will encrypt outgoing files and decrypt incoming files 
+\item Employees can customize their account by changing their nickname, profile photo and password. 
+\end{itemize}
+\begin{center}
+    \includegraphics{Graphics/2.2diagram.png}\\
+    \emph{Figure 1: Functions and Relationships}
+\end{center}
+
 % End SubSection
 
 \subsection{User Characteristics}
@@ -388,11 +414,212 @@ The business events we will consider:
 	\textcolor{red}{Insert Scenario Here}
 \end{enumerate}
 
+\begin{enumerate}[{\bf BE4.}]
+    \item Customizing Account \\ 
+        \textbf{Pre-condition:} The employee must already have an account and the employee is logged in 
+        \begin{enumerate}
+            \item[VP1.] Employee \\
+                \textbf{Main Success Scenario:}
+                \begin{enumerate}
+                    \item Employee selects “Settings” from main menu. 
+                    \item System displays all account information and options that can be customized. 
+                    \item Employee customizes account and presses “Save”. 
+                    \item System authenticates Employee to approve changes. 
+                \end{enumerate}
+                \textbf{Secondary Scenario:}
+                \begin{enumerate}
+                    \item[3i.] Employee has an invalid change
+                    \begin{enumerate}
+                        \item[3i.1] Employee has an invalid change
+                        \item[3i.2] System cannot save changes
+                        \item[3i.3] Customizing account failed, return to BE4.VP1.2
+                    \end{enumerate}
+                    \item[4i.]
+                    \begin{enumerate}
+                        \item[4i.1] System fails to authenticate Employee
+                        \item[4i.2] System cannot save changes
+                        \item[4i.3] Customizing account failed, return to BE4.VP1.2
+                    \end{enumerate}
+                \end{enumerate}
+            \item[VP2.] Administrator \\
+            \indent N/A 
+            \item[VP3.] Customer Support \\
+            \indent N/A 
+            \item[VP4.] Maintenance \\
+            \indent N/A 
+            \item[VP5.] Cybersecurity \\
+            \indent N/A 
+            \item[VP6.] Management \\
+            \indent N/A 
+        \end{enumerate}
+        {\bf Global Scenario:}\\
+        \begin{enumerate}
+            \item \textbf{Precondition:} The employee must already have an account and the employee is logged in
+            \item \textbf{Main Success Scenario:}
+            \begin{enumerate}
+                \item Employee selects “Settings” from main menu. 
+                \item System displays all account information and options that can be customized. 
+                \item Employee customizes account and presses “Save”. 
+                \item System authenticates Employee to approve changes. 
+            \end{enumerate}
+            \item \textbf{Secondary Scenario:}
+            \begin{enumerate}
+                \item[3i.] Employee has an invalid change
+                \begin{enumerate}
+                    \item[3i.1] Employee has an invalid change
+                    \item[3i.2] System cannot save changes
+                    \item[3i.3] Customizing account failed, return to BE4.VP1.2
+                \end{enumerate}
+                \item[4i.]
+                \begin{enumerate}
+                    \item[4i.1] System fails to authenticate Employee
+                    \item[4i.2] System cannot save changes
+                    \item[4i.3] Customizing account failed, return to BE4.VP1.2
+                \end{enumerate}
+            \end{enumerate}
+        \end{enumerate}
+\end{enumerate}
 
 
+\begin{enumerate}[{\bf BE5.}]
+    \item Logging in \\ 
+        \textbf{Pre-condition:} The employee must already have an account. 
+        \begin{enumerate}
+            \item[VP1.] Employee \\
+                \textbf{Main Success Scenario:}
+                \begin{enumerate}
+                    \item System prompts the employee to enter their login information.  
+                    \item Employee enters their login information and presses “Request Key”.  
+                    \item System uses a mediated authentication protocol to verify the employee’s information. 
+                    \item System generates a key, if authorized, and displays it on screen 
+                    \item Employee inputs the correct key and gains access to the application 
+                \end{enumerate}
+                \textbf{Secondary Scenario:}
+                \begin{enumerate}
+                    \item[2i.] Incorrect Information
+                    \begin{enumerate}
+                        \item[2i.1] Incorrect Information
+                        \item[2i.2] Login failed, return to BE5.VP1.1
+                    \end{enumerate}
+                    \item[3i.] Unauthorized requesting agent
+                    \begin{enumerate}
+                        \item[3i.1] Unauthorized requesting agent
+                        \item[3i.2] Authorization fails, return to BE5.VP1.1
+                    \end{enumerate}
+                    \item[5i.] Incorrect Key
+                    \begin{enumerate}
+                        \item[5i.1] Incorrect Key
+                        \item[5i.2] Display incorrect key message, return to BE5.VP1.1 
+                    \end{enumerate}
+                \end{enumerate}
+            \item[VP2.] Administrator \\
+            \indent N/A 
+            \item[VP3.] Customer Support \\
+            \begin{enumerate}
+                \item[3i.] System displays an error page and provides an option to contact customer support
+                \begin{enumerate}
+                    \item[3i.1] System displays an error page and provides an option to contact customer support
+                    \item[3i.2] Customer Support personally verifies employee information and manually authenticates employee, return to BE6.VP1.4
+                \end{enumerate}
+            \end{enumerate}
+            \item[VP4.] Maintenance \\
+            \indent N/A 
+            \item[VP5.] Cybersecurity \\
+            \indent N/A 
+            \item[VP6.] Management \\
+            \indent N/A 
+        \end{enumerate}
+        {\bf Global Scenario:}\\
+        \begin{enumerate}
+            \item \textbf{Precondition:} Employee must already have an account.
+            \item \textbf{Main Success Scenario:}
+            \begin{enumerate}
+                \item System prompts the employee to enter their login information.  
+                \item Employee enters their login information and presses “Request Key”.  
+                \item System uses a mediated authentication protocol to verify the employee’s information. 
+                \item System generates a key, if authorized, and displays it on screen 
+                \item Employee inputs the correct key and gains access to the application 
+            \end{enumerate}
+            \item \textbf{Secondary Scenario:}
+            \begin{enumerate}
+                \item[2i.] Incorrect Information
+                \begin{enumerate}
+                    \item[2i.1] Incorrect Information
+                    \item[2i.2] Login failed, return to BE5.VP1.1
+                \end{enumerate}
+                \item[3i.] Unauthorized requesting agent
+                \begin{enumerate}
+                    \item[3i.1] Unauthorized requesting agent
+                    \item[3i.2] System displays an error page and provides an option to contact customer support
+                    \item[3i.3]  Customer Support personally verifies employee information and manually authenticates employee, return to BE6.VP1.4
+                \end{enumerate}
+                \item[5i.] Incorrect Key
+                \begin{enumerate}
+                    \item[5i.1] Incorrect Key
+                    \item[5i.2] Display incorrect key message, return to BE5.VP1.1 
+                \end{enumerate}
+            \end{enumerate}
+        \end{enumerate}
+\end{enumerate}
 
-
-
+\begin{enumerate}[{\bf BE6.}]
+    \item Account Register \\ 
+        \textbf{Pre-condition:} Employee must be currently hired by the company and not have an existing account.  Management has provided the employee with a unique employee id
+        \begin{enumerate}
+            \item[VP1.] Employee \\
+                \textbf{Main Success Scenario:}
+                \begin{enumerate}
+                    \item Employee opens the app on their phone   
+                    \item System prompts the employee to either login or register a new account 
+                    \item Employee selects “Register new account”  
+                    \item System asks for employee id and other personal detail 
+                    \item Employee enters relevant information and presses “Register” 
+                    \item System verifies the information provided 
+                    \item System registers the employee to the database and displays login page 
+                \end{enumerate}
+                \textbf{Secondary Scenario:}
+                \begin{enumerate}
+                    \item[5i.] Incorrect employee information
+                    \begin{enumerate}
+                        \item[5i.1] System does not accept input
+                        \item[5i.2] Account registration failed
+                    \end{enumerate}
+                \end{enumerate}
+            \item[VP2.] Administrator \\
+            \indent N/A 
+            \item[VP3.] Customer Support \\
+            \indent N/A 
+            \item[VP4.] Maintenance \\
+            \indent N/A 
+            \item[VP5.] Cybersecurity \\
+            \indent 5i. System notifies cybersecurity of failed account registration attempt 
+            \item[VP6.] Management \\
+            \indent 7i. System notifies management that the employee’s account is set up 
+        \end{enumerate}
+        {\bf Global Scenario:}\\
+        \begin{enumerate}
+            \item \textbf{Precondition:} Employee must be currently hired by the company and not have an existing account. Management has provided the employee with a unique employee id 
+            \item \textbf{Main Success Scenario:}
+            \begin{enumerate}
+                \item Employee opens the app on their phone 
+                \item System prompts the employee to either login or register a new account 
+                \item Employee selects “Register new account”
+                \item System asks for employee id and other personal detail
+                \item Employee enters relevant information and presses “Register” 
+                \item System verifies the information provided
+                \item System registers the employee to the database, displays a login page and notifies management that the employee’s account is set up
+            \end{enumerate}
+            \item \textbf{Secondary Scenario:}
+            \begin{enumerate}
+                \item[5i.] Incorrect employee information 
+                \begin{enumerate}
+                    \item[5i.1] System does not accept input
+                    \item[5i.2] Account registration failed
+                    \item[5i.3] System notifies cybersecurity of failed account registration attempt
+                \end{enumerate}
+            \end{enumerate}
+        \end{enumerate}
+\end{enumerate}
 
 \begin{enumerate}[{\bf BE7.}]
 	\item Attaching file  \\

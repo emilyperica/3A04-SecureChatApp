@@ -1,0 +1,108 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam linetype ortho
+abstract class AccountManagement {
+  -encryptionManager : EncryptionManagement
+  -employeeDb : EmployeeDatabase
+  -accountLogin : AccountLogin
+  -accountCreator : RegisterAccount
+  -profileViewer : ViewProfile
+  -accountEditor : CustomizeAccount
+  -accountMessage : DisplayAccountMessages
+  -accountPage : DisplayAccountPages
+
+  +login(username, password) : boolean
+  +registerAccount(username, password, email, phone_num) : boolean
+  +registerAccount() : void
+  +viewProfile() : void
+  +customizeAccount(username, password, email, phone_num) : boolean
+}
+class AccountManager {
+       -encryptionManager : EncryptionManagement
+       -employeeDb : EmployeeDatabase
+       -accountLogin : AccountLogin
+       -accountCreator : CreateAccount
+       -profileViewer : ViewProfile
+       -accountEditor : EditAccount
+       -accountMessage : DisplayAccountMessages
+       -accountPage : DisplayAccountPages
+
+       +login(username, password) : boolean
+       +registerAccount(username, password, email, phone_num) : boolean
+       +viewProfile() : void
+       +customizeAccount(username, password, email, phone_num) : boolean
+}
+class AccountLogin {
+	+login(username, password) : boolean
+}
+class RegisterAccount {
+	+registerAccount(username, password, email, phone_num) : boolean
+}
+class ViewProfile {
+	+viewProfile() : void
+}
+class CustomizeAccount {
+	+customizeAccount(username, password, email, phone_num) : boolean
+}
+
+class EmployeeDatabase {
+	-employeeInfo : EmployeeInfo
+	-employeeId : UUID
+	+getEmployeeInfo() : EmployeeInfo
+	+updateEmployeeInfo() : boolean
+}
+class EmployeeInfo {
+	- employeeID : UUID
+	- username : String
+	- password : String
+	- email : String
+	- phoneNumber : String
+}
+
+interface DisplayAccountMessages {
+	+displayMessage() : void
+
+}
+
+interface DisplayAccountPages {
+	+displayPage() : void
+
+}
+class AccountSuccess{
+	- message : String
+	+displayMessage() : void
+}
+class AccountError {
+	- message : String
+	+displayMessage() : void}
+}
+
+class CreateAccountPage {
+	- message : String
+	+displayPage() : void
+}
+
+class LoginPage {
+	- message : String
+	+displayPage() : void
+}
+
+
+AccountManagement <|-- AccountManager
+AccountManagement *-- AccountLogin
+AccountManagement *-- RegisterAccount
+AccountManagement *-- ViewProfile
+AccountManagement *-- CustomizeAccount
+AccountManagement *-- EmployeeDatabase
+AccountManagement --* DisplayAccountMessages
+AccountManagement --* DisplayAccountPages
+DisplayAccountMessages <|-- AccountSuccess
+DisplayAccountMessages <|-- AccountError
+DisplayAccountPages <|-- CreateAccountPage
+DisplayAccountPages <|-- LoginPage
+
+
+
+
+
+@enduml

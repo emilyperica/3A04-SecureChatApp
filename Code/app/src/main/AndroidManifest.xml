@@ -13,6 +13,21 @@
         android:theme="@style/Theme.MacMessenger"
         tools:targetApi="31">
         <activity
+            android:name=".Messaging"
+            android:exported="false" />
+        <activity
+            android:name=".AccountManagement"
+            android:exported="false" />
+        <activity
+            android:name=".ChatLog"
+            android:exported="false" />
+        <activity
+            android:name=".Authentication"
+            android:exported="false" />
+        <activity
+            android:name=".Encryption"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"

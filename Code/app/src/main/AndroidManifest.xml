@@ -12,9 +12,40 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MacMessenger"
         tools:targetApi="31">
+
+<!--        <activity-->
+<!--            android:name=".chatActivity"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".setProfile"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".otpAuthentication"-->
+<!--            android:exported="false" />-->
         <activity
-            android:name=".Messaging"
-            android:exported="false" />
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".splashscreen"
+            android:exported="false"
+            android:label="@string/title_activity_splashscreen"
+            android:theme="@style/Theme.MacMessenger" />
+<!--        <activity-->
+<!--            android:name=".Messages"-->
+<!--            android:exported="false" />-->
+        <activity
+            android:name=".specificchat"
+            android:exported="false"
+            android:theme="@style/Theme.MacMessenger"/>
         <activity
             android:name=".AccountManagement"
             android:exported="false" />
@@ -27,17 +58,6 @@
         <activity
             android:name=".Encryption"
             android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.MacMessenger">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

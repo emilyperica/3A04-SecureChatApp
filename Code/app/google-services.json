@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "284442059032",
+    "project_id": "macmessenger-542de",
+    "storage_bucket": "macmessenger-542de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284442059032:android:9788c0cd7bb175e96f3e6d",
+        "android_client_info": {
+          "package_name": "com.example.macmessenger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcHw0zH9-Sv8qKBsc49T414xkhTy8a3MQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

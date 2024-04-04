@@ -15,7 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Signup_AccountMgmt extends AppCompatActivity {
-    EditText SignUpEmail, SignUpPassword;
+    EditText SignUpEmail, SignUpPassword, Signup_Password_validate;
     Button SignupButton;
     TextView loginRedirect;
     FirebaseDatabase database;
@@ -28,24 +28,30 @@ public class Signup_AccountMgmt extends AppCompatActivity {
 
         SignUpEmail = findViewById(R.id.editTextText2);
         SignUpPassword = findViewById(R.id.editTextTextPassword);
+        Signup_Password_validate = findViewById(R.id.editTextTextPassword2);
         SignupButton = findViewById(R.id.button2);
         loginRedirect = findViewById(R.id.textView4);
 
         SignupButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                database = FirebaseDatabase.getInstance();
-                reference = database.getReference("users");
-
                 String email = SignUpEmail.getText().toString();
                 String password = SignUpPassword.getText().toString();
+                String password2 = Signup_Password_validate.getText().toString();
 
-                HelperClass_AccountMgmt helperClass = new HelperClass_AccountMgmt(email,password);
-                reference.child(email).setValue(helperClass);
+                if(password.equals(password2)) {
+                    database = FirebaseDatabase.getInstance();
+                    reference = database.getReferenceFromUrl("https://macmessenger-689d0-default-rtdb.firebaseio.com/users");
 
-                Toast.makeText(Signup_AccountMgmt.this, "You have signup successfully",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Signup_AccountMgmt.this, Login_AccountMgmt.class);
-                startActivity(intent);
+                    HelperClass_AccountMgmt helperClass = new HelperClass_AccountMgmt(email, password);
+                    reference.child(email).setValue(helperClass);
+
+                    Toast.makeText(Signup_AccountMgmt.this, "You have signup successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Signup_AccountMgmt.this, Login_AccountMgmt.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(Signup_AccountMgmt.this,"Passwords are not matching",Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

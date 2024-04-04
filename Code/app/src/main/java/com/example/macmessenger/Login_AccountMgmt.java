@@ -81,7 +81,7 @@ public class Login_AccountMgmt extends AppCompatActivity {
         String userUsername = loginUsername.getText().toString().trim();
         String userPassword = loginPassword.getText().toString().trim();
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://macmessenger-689d0-default-rtdb.firebaseio.com/users");
         Query checkUserDatabase = reference.orderByChild("email").equalTo(userUsername);
         checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -1,13 +1,32 @@
 {
   "project_info": {
-    "project_number": "284442059032",
-    "project_id": "macmessenger-542de",
-    "storage_bucket": "macmessenger-542de.appspot.com"
+    "project_number": "613378824460",
+    "project_id": "easy-chat-backend-0",
+    "storage_bucket": "easy-chat-backend-0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:284442059032:android:9788c0cd7bb175e96f3e6d",
+        "mobilesdk_app_id": "1:613378824460:android:919434e4a01f15f06ad129",
+        "android_client_info": {
+          "package_name": "com.example.easychat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVnhMb0FWVSgYDpsHVXwC_Cw1T1IELm24"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613378824460:android:197b90299a274cb96ad129",
         "android_client_info": {
           "package_name": "com.example.macmessenger"
         }
@@ -15,7 +34,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCcHw0zH9-Sv8qKBsc49T414xkhTy8a3MQ"
+          "current_key": "AIzaSyBVnhMb0FWVSgYDpsHVXwC_Cw1T1IELm24"
         }
       ],
       "services": {

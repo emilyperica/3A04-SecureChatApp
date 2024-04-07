@@ -1,5 +1,6 @@
 package com.example.macmessenger.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import com.example.macmessenger.ChatActivity;
 import com.example.macmessenger.R;
 import com.example.macmessenger.model.ChatroomModel;
 import com.example.macmessenger.model.UserModel;
+import com.example.macmessenger.utils.AESUtil;
 import com.example.macmessenger.utils.AndroidUtil;
 import com.example.macmessenger.utils.FirebaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -30,6 +32,7 @@ public class RecentChatRecyclerAdapter extends FirestoreRecyclerAdapter<Chatroom
         this.context = context;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onBindViewHolder(@NonNull ChatroomModelViewHolder holder, int position, @NonNull ChatroomModel model) {
         FirebaseUtil.getOtherUserFromChatroom(model.getUserIds())
@@ -50,9 +53,9 @@ public class RecentChatRecyclerAdapter extends FirestoreRecyclerAdapter<Chatroom
 
                             holder.usernameText.setText(otherUserModel.getUsername());
                             if(lastMessageSentByMe)
-                                holder.lastMessageText.setText("You : "+model.getLastMessage());
+                                holder.lastMessageText.setText("You : "+ AESUtil.decrypt(model.getLastMessage()));
                             else
-                                holder.lastMessageText.setText(model.getLastMessage());
+                                holder.lastMessageText.setText(AESUtil.decrypt(model.getLastMessage()));
                             holder.lastMessageTime.setText(FirebaseUtil.timestampToString(model.getLastMessageTimestamp()));
 
                             holder.itemView.setOnClickListener(v -> {

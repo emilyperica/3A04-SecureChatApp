@@ -18,6 +18,7 @@ import com.example.macmessenger.model.ChatroomModel;
 import com.example.macmessenger.model.UserModel;
 import com.example.macmessenger.utils.AndroidUtil;
 import com.example.macmessenger.utils.FirebaseUtil;
+import com.example.macmessenger.utils.AESUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -115,14 +116,14 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-    void sendMessageToUser(String message){
-
+    void sendMessageToUser(String message) {
+        String encryptedMessage = AESUtil.encrypt(message);
         chatroomModel.setLastMessageTimestamp(Timestamp.now());
         chatroomModel.setLastMessageSenderId(FirebaseUtil.currentUserId());
-        chatroomModel.setLastMessage(message);
+        chatroomModel.setLastMessage(encryptedMessage);
         FirebaseUtil.getChatroomReference(chatroomId).set(chatroomModel);
 
-        ChatMessageModel chatMessageModel = new ChatMessageModel(message,FirebaseUtil.currentUserId(),Timestamp.now());
+        ChatMessageModel chatMessageModel = new ChatMessageModel(encryptedMessage,FirebaseUtil.currentUserId(),Timestamp.now());
         FirebaseUtil.getChatroomMessageReference(chatroomId).add(chatMessageModel)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override

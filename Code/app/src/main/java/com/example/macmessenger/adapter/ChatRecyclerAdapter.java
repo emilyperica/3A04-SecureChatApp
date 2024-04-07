@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.macmessenger.R;
 import com.example.macmessenger.model.ChatMessageModel;
+import com.example.macmessenger.utils.AESUtil;
 import com.example.macmessenger.utils.FirebaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -32,11 +33,11 @@ public class ChatRecyclerAdapter extends FirestoreRecyclerAdapter<ChatMessageMod
        if(model.getSenderId().equals(FirebaseUtil.currentUserId())){
           holder.leftChatLayout.setVisibility(View.GONE);
           holder.rightChatLayout.setVisibility(View.VISIBLE);
-          holder.rightChatTextview.setText(model.getMessage());
+          holder.rightChatTextview.setText(AESUtil.decrypt(model.getMessage()));
        }else{
            holder.rightChatLayout.setVisibility(View.GONE);
            holder.leftChatLayout.setVisibility(View.VISIBLE);
-           holder.leftChatTextview.setText(model.getMessage());
+           holder.leftChatTextview.setText(AESUtil.decrypt(model.getMessage()));
        }
     }
 

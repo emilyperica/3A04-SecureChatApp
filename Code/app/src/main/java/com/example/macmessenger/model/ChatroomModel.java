@@ -1,5 +1,6 @@
 package com.example.macmessenger.model;
 
+import com.example.macmessenger.utils.AESUtil;
 import com.google.firebase.Timestamp;
 
 import java.util.List;

@@ -40,8 +40,9 @@ public class Signup_AccountMgmt extends AppCompatActivity {
                 String password2 = Signup_Password_validate.getText().toString();
 
                 if(password.equals(password2)) {
-                    database = FirebaseDatabase.getInstance();
-                    reference = database.getReferenceFromUrl("https://macmessenger-689d0-default-rtdb.firebaseio.com/users");
+
+                    database = FirebaseDatabase.getInstance("https://easy-chat-backend-0-default-rtdb.firebaseio.com/");
+                    reference = database.getReference("users");
 
                     HelperClass_AccountMgmt helperClass = new HelperClass_AccountMgmt(email, password);
                     reference.child(email).setValue(helperClass);

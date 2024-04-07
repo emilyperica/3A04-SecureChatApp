@@ -13,4 +13,9 @@
     <color name="chat_color_sender">#1E88E5</color>
     <color name="chat_color_receiver">#7CB342</color>
 
+    <color name="app_theme">#009dff</color>
+    <color name="app_theme_light">#f6fbff</color>
+    <color name="exit_text_border">#03A9F4</color>
+    <color name="edit_text_background">#f6fbff</color>
+
 </resources>

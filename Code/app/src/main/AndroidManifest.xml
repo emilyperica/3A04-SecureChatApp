@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MacMessenger"
+        android:theme="@style/Theme.AppCompat.Light"
         tools:targetApi="31">
 
         <activity
@@ -21,12 +21,17 @@
                 android:value="" />
         </activity>
         <activity
+
             android:name=".SearchUserActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+            android:name=".HelperClass_AccountMgmt"
+            android:exported="false" />
+
         <activity
             android:name=".LoginUsernameActivity"
             android:exported="false">
@@ -51,6 +56,14 @@
         <activity
             android:name=".SplashActivity"
             android:exported="true">
+            android:name=".Signup_AccountMgmt"
+            android:exported="false" />
+        <activity
+            android:name=".Login_AccountMgmt"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.Light">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

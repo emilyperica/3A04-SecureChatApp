@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+<
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
     implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
@@ -78,6 +79,7 @@ dependencies {
     implementation(libs.firebase.storage)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.messaging)
+    implementation(libs.firebase.database)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

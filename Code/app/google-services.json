@@ -3,6 +3,7 @@
     "project_number": "613378824460",
     "project_id": "easy-chat-backend-0",
     "storage_bucket": "easy-chat-backend-0.appspot.com"
+
   },
   "client": [
     {
@@ -34,7 +35,9 @@
       "oauth_client": [],
       "api_key": [
         {
+
           "current_key": "AIzaSyBVnhMb0FWVSgYDpsHVXwC_Cw1T1IELm24"
+
         }
       ],
       "services": {

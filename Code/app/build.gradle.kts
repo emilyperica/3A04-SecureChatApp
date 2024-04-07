@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.macmessenger"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -61,7 +61,26 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+<
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.constraintlayout)
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+    implementation("com.google.firebase:firebase-database")
+    implementation("com.google.gms:google-services:4.4.1")
+    implementation("com.hbb20:ccp:2.5.2")
+    implementation("com.squareup.picasso:picasso:2.71828")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.4.4")
+    implementation("com.firebaseui:firebase-ui-firestore:8.0.2")
+    implementation("com.google.firebase:firebase-storage-ktx:20.1.0")
+    implementation("com.github.dhaval2404:imagepicker:2.1")
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.storage)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.messaging)
     implementation(libs.firebase.database)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

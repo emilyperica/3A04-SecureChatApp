@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MacMessenger" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.EasyChat" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/my_primary</item>
         <item name="colorPrimaryVariant">@color/my_primary</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/my_secondary</item>
         <item name="colorSecondaryVariant">@color/my_secondary</item>

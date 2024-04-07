@@ -77,7 +77,7 @@ public class Login_AccountMgmt extends AppCompatActivity {
         }
     }
 
-    public void checkUser(){
+    public String checkUser(){
         String userUsername = loginUsername.getText().toString().trim();
         String userPassword = loginPassword.getText().toString().trim();
 
@@ -92,7 +92,7 @@ public class Login_AccountMgmt extends AppCompatActivity {
 
                     if(passwordFromDB.equals(userPassword)){
                         loginUsername.setError(null);
-                        Intent intent =new Intent(Login_AccountMgmt.this,Messaging.class);
+                        Intent intent =new Intent(Login_AccountMgmt.this,Messaging.class); //change to MainActivity.class after merge to main. 
                         startActivity(intent);
                     }else{
                         loginPassword.setError("Invalid credentials");
@@ -109,6 +109,7 @@ public class Login_AccountMgmt extends AppCompatActivity {
 
             }
         });
+        return userUsername;
     }
 
 

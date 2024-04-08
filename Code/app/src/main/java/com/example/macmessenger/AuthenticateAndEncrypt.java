@@ -3,24 +3,41 @@
 
 package com.example.macmessenger;
 
+import android.provider.Settings;
+import android.security.keystore.KeyGenParameterSpec;
+import android.security.keystore.KeyProperties;
+
+import androidx.annotation.NonNull;
+
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
+import java.security.spec.KeySpec;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.concurrent.ExecutionException;
 
 import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AuthenticateAndEncrypt {
-    public String senderID; // TODO: senderID and receiverID very ambiguous, need to be renamed
+    public String senderID;
     public String receiverID;
-    private byte[] sessionKey;
+    private String sessionKey;
     private DataSnapshot snapshot;
     private DatabaseReference db;
     final private String dbStr = "https://easy-chat-backend-0-default-rtdb.firebaseio.com/";
@@ -31,31 +48,38 @@ public class AuthenticateAndEncrypt {
         db = FirebaseDatabase.getInstance(dbStr).getReference();
 
         try {
-            snapshot = Tasks.await(db.get());
-            if (snapshot.child(senderID).exists()) {
-                if (snapshot.child(senderID).child("sessionKey").exists()) {
-                    // TODO: Test that db and key successfully retrieved
-                    String sessionKeyStr = String.valueOf(snapshot.child(senderID).child("sessionKey").getValue());
-                    this.sessionKey = sessionKeyStr.getBytes();
+            ValueEventListener listener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    snapshot = dataSnapshot;
+                    if (dataSnapshot.hasChild(senderID)) {
+                        if (dataSnapshot.child(senderID).hasChild("sessionKey")) {
+                            // TODO: Test that db and key successfully retrieved
+                            sessionKey = String.valueOf(dataSnapshot.child(senderID).child("sessionKey").getValue());
+                        } else {
+                            decryptSessionKey(senderPW);
+                        }
+                    } else {
+                        initiateAuth(senderPW);
+                    }
                 }
-                else {
-                    decryptSessionKey(senderPW);
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
                 }
-            }
-            else {
-                initiateAuth(senderPW);
-            }
+            };
+            db.addValueEventListener(listener);
+        }catch (Exception e) {
+            System.out.print(e.getMessage());
         }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+
     }
 
-    public byte[] encrypt(String plainText) {
+    public String encrypt(String plainText) {
         return AES.encrypt(plainText, sessionKey);
     }
 
-    public String decrypt(byte[] cipherText) {
+    public String decrypt(String cipherText) {
         return AES.decrypt(cipherText, sessionKey);
     }
 
@@ -66,93 +90,99 @@ public class AuthenticateAndEncrypt {
     }
 
     private void initiateAuth(String privateKey) {
-        // TODO: unify variable naming conventions
         KDC kdc = new KDC();
         byte[] nonce = new byte[64];
         SecureRandom rand = new SecureRandom();
         rand.nextBytes(nonce);
 
-        byte[][] keys = kdc.getUserKeys(senderID, receiverID, nonce);
-        byte[] senderSessionKey = keys[0]; // y_A
-        byte[] receiverSessionKey = keys[1]; // y_B
+        String[] keys = kdc.getUserKeys(senderID, receiverID, nonce);
+        String senderSessionKey = keys[0]; // y_A
+        String receiverSessionKey = keys[1]; // y_B
 
-        String[] plainText = AES.decrypt(senderSessionKey, privateKey.getBytes()).split(":");
+        String plainText = new String(Base64.getDecoder().decode(AES.decrypt(senderSessionKey, privateKey).getBytes(StandardCharsets.UTF_8)));
 
-        if (!plainText[1].equals(Arrays.toString(nonce)) || !plainText[2].equals(receiverID)) {
+        String[] plainTextLs = plainText.split(":");
+
+        if (!plainTextLs[1].equals(Arrays.toString(nonce)) || !plainTextLs[3].equals(receiverID)) {
             // TODO: KDC not trustworthy; raise an error
         }
         else {
-            sessionKey = plainText[0].getBytes();
+            sessionKey = plainTextLs[0];
             db.child(senderID).child("sessionKey").setValue(sessionKey);
         }
 
         long timeStamp = System.currentTimeMillis();
-        byte[] sharedSessionKey = AES.encrypt(senderID + ":" + timeStamp, sessionKey); // y_AB
+        String sharedSessionKey = AES.encrypt(senderID + ":" + timeStamp, sessionKey); // y_AB
 
         db.child(receiverID).child("sharedSessionKey").setValue(sharedSessionKey);
-        db.child(receiverID).child("sessionKey").setValue(receiverSessionKey);
+        db.child(receiverID).child("publicSessionKey").setValue(receiverSessionKey);
 
     }
 
     private void decryptSessionKey(String privateKey) {
-        // TODO: TEST - make sure keys being correctly accessed
         String sharedSessionKey = String.valueOf(snapshot.child(senderID).child("sharedSessionKey").getValue());
-        String senderSessionKey = String.valueOf(snapshot.child(senderID).child("mySessionKey").getValue());
+        String senderSessionKey = String.valueOf(snapshot.child(senderID).child("publicSessionKey").getValue());
 
-        String[] plainText1 = AES.decrypt(senderSessionKey.getBytes(), privateKey.getBytes()).split(":");
-        String[] plainText2 = AES.decrypt(sharedSessionKey.getBytes(), plainText1[0].getBytes()).split(":");
+        String[] plainText1 = AES.decrypt(senderSessionKey, privateKey).split(":");
+        String[] plainText2 = AES.decrypt(sharedSessionKey, plainText1[0]).split(":");
 
-        // TODO: Lifetime and time stamp verifications
         if (!plainText1[1].equals(plainText2[0])) {
-            // TODO: KDC not trustworthy; raise an error
+            // KDC not trustworthy
         }
         else {
-            sessionKey = plainText1[0].getBytes();
+            sessionKey = plainText1[0];
             db.child(senderID).child("sessionKey").setValue(sessionKey);
         }
-
-
     }
 
     private class KDC {
-        private byte[] sessionKey = new byte[64];
+        private byte[] keyBytes = new byte[64];
+        private String sessionKey;
         public long lifetime = System.currentTimeMillis() + 1000*60*60; // 1 hour
         public KDC() {
             SecureRandom rand = new SecureRandom();
-            rand.nextBytes(sessionKey);
+            rand.nextBytes(keyBytes);
+            sessionKey = new String(keyBytes, StandardCharsets.UTF_8);
             db.child("KDC").child("sessionKey").setValue(sessionKey);
         }
-        public byte[][] getUserKeys(String clientA, String clientB, byte[] nonce) {
-            // TODO: unify variable naming conventions
+        public String[] getUserKeys(String clientA, String clientB, byte[] nonce) {
             if (System.currentTimeMillis() > lifetime) { // check if key is expired
                 SecureRandom rand = new SecureRandom();
-                rand.nextBytes(sessionKey);
+                rand.nextBytes(keyBytes);
+                sessionKey = Base64.getEncoder().encodeToString(keyBytes);
             }
 
-            String messageA = Arrays.toString(sessionKey) + ":" + Arrays.toString(nonce) + ":" + lifetime + ":" + clientB;
-            String messageB = Arrays.toString(sessionKey) + ":" + clientA + ":" + lifetime;
+            String messageA = sessionKey + ":" + Arrays.toString(nonce) + ":" + lifetime + ":" + clientB;
+            String messageB = sessionKey + ":" + clientA + ":" + lifetime;
 
             String privateKeyA = String.valueOf(snapshot.child("users").child(clientA).child("password").getValue());
             String privateKeyB = String.valueOf(snapshot.child("users").child(clientB).child("password").getValue());
 
-            byte[] sessionKeyA = AES.encrypt(messageA, privateKeyA.getBytes());
-            byte[] sessionKeyB = AES.encrypt(messageB, privateKeyB.getBytes());
+            String sessionKeyA = AES.encrypt(messageA, privateKeyA);
+            String sessionKeyB = AES.encrypt(messageB, privateKeyB);
 
-            return new byte[][] {sessionKeyA, sessionKeyB};
+            return new String[] {sessionKeyA, sessionKeyB};
         }
     }
 
     private static class AES {
-        static byte[] encrypt(String plainTextStr, byte[] key) {
+        static String encrypt(String plainTextStr, String key) {
             try {
-                SecretKeyFactory factory = SecretKeyFactory.getInstance("AES");
-                SecretKeySpec keySpec = new SecretKeySpec(key, "AES");
-                SecretKey secretKey = factory.generateSecret(keySpec);
+                byte[] iv = new byte[16];
+                byte[] salt = new byte[16];
+                new SecureRandom().nextBytes(iv);
+                IvParameterSpec ivSpec = new IvParameterSpec(iv);
+
+                SecretKeyFactory factory
+                        = SecretKeyFactory.getInstance(
+                        "PBKDF2WithHmacSHA256");
+                KeySpec spec = new PBEKeySpec(key.toCharArray(), salt,16384, 128);
+                SecretKeySpec keySpec = new SecretKeySpec(factory.generateSecret(spec).getEncoded(), "AES");
 
                 Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-                cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+                cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
 
-                return cipher.doFinal(plainTextStr.getBytes());
+                return Base64.getEncoder().encodeToString(cipher.doFinal(plainTextStr.getBytes(StandardCharsets.UTF_8)));
             }
             catch (Exception e){
                 System.out.println(e.getMessage());
@@ -161,16 +191,23 @@ public class AuthenticateAndEncrypt {
             return null;
         }
 
-        static String decrypt(byte[] cipherText, byte[] key) {
+        static String decrypt(String cipherText, String key) {
             try {
-                SecretKeyFactory factory = SecretKeyFactory.getInstance("AES");
-                SecretKeySpec keySpec = new SecretKeySpec(key, "AES");
-                SecretKey secretKey = factory.generateSecret(keySpec);
+                byte[] iv = new byte[16];
+                byte[] salt = new byte[16];
+                new SecureRandom().nextBytes(iv);
+                IvParameterSpec ivSpec = new IvParameterSpec(iv);
+
+                SecretKeyFactory factory
+                        = SecretKeyFactory.getInstance(
+                        "PBKDF2WithHmacSHA256");
+                KeySpec spec = new PBEKeySpec(key.toCharArray(), salt,16384, 128);
+                SecretKeySpec keySpec = new SecretKeySpec(factory.generateSecret(spec).getEncoded(), "AES");
 
                 Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-                cipher.init(Cipher.DECRYPT_MODE, secretKey);
+                cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
 
-                return new String (cipher.doFinal(cipherText));
+                return Base64.getEncoder().encodeToString(cipher.doFinal(Base64.getDecoder().decode(cipherText)));
             }
             catch (Exception e){
                 System.out.println(e.getMessage());

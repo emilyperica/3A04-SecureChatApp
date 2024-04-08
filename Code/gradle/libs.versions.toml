@@ -15,6 +15,7 @@ constraintlayout = "2.1.4"
 kerberosServer = "1.1.0"
 jaas = "1.0.01"
 firebaseDatabase = "20.3.1"
+comGoogleGmsGoogleServicesGradlePlugin = "4.4.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,6 +39,7 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 kerberos-server = { group = "com.github.kwart.kerberos", name = "kerberos-server", version.ref = "kerberosServer" }
 jaas = { group = "javax.security", name = "jaas", version.ref = "jaas" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
+com-google-gms-google-services-gradle-plugin = { group = "com.google.gms.google-services", name = "com.google.gms.google-services.gradle.plugin", version.ref = "comGoogleGmsGoogleServicesGradlePlugin" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

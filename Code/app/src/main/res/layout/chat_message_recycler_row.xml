@@ -20,6 +20,15 @@
             android:textSize="18sp"
             android:text="Hello"
             android:id="@+id/left_chat_textview"/>
+
+        <ImageView
+            android:id="@+id/left_chat_image_view"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="5dp"
+            android:scaleType="centerCrop"
+            />
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -36,6 +45,13 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:id="@+id/right_chat_textview"/>
+        <ImageView
+            android:id="@+id/right_chat_image_view"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="5dp"
+            android:scaleType="centerCrop"
+            />
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,13 +1,25 @@
 package com.example.macmessenger;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +31,7 @@ import com.example.macmessenger.model.UserModel;
 import com.example.macmessenger.utils.AndroidUtil;
 import com.example.macmessenger.utils.FirebaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.common.internal.service.Common;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
@@ -30,6 +43,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Arrays;
 
+import kotlin.coroutines.Continuation;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -37,6 +51,18 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import android.content.Intent;
+import android.widget.Toast;
+
+import com.google.firebase.storage.StorageTask;
+import com.google.android.gms.tasks.*;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.google.firebase.database.DatabaseReference;
+import android.content.ContentResolver;
+import android.database.Cursor;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -52,6 +78,12 @@ public class ChatActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ImageView imageView;
 
+    //Send Files
+    ImageButton sendFilesButton;
+    String fileCheck = "", myUrl = "";
+    StorageTask uploadTask;
+    Uri fileUri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +96,7 @@ public class ChatActivity extends AppCompatActivity {
 
         messageInput = findViewById(R.id.chat_message_input);
         sendMessageBtn = findViewById(R.id.message_send_btn);
+        sendFilesButton = findViewById(R.id.send_files_btn);
         backBtn = findViewById(R.id.back_btn);
         otherUsername = findViewById(R.id.other_username);
         recyclerView = findViewById(R.id.chat_recycler_view);
@@ -91,7 +124,140 @@ public class ChatActivity extends AppCompatActivity {
 
         getOrCreateChatroomModel();
         setupChatRecyclerView();
+
+        sendFilesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CharSequence options[] = new CharSequence[]
+                        {
+                                "Images",
+                                ".pdf Files",
+                                "MS Word .docx Files"
+                        };
+                AlertDialog.Builder builder = new AlertDialog.Builder(ChatActivity.this);
+                builder.setTitle("Select File Type");
+
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int optn) {
+                        if (optn == 0){
+                            fileCheck = "image";
+
+                            Intent intent = new Intent();
+                            intent.setAction(Intent.ACTION_GET_CONTENT);
+                            intent.setType("image/*");
+                            fileActivityResultLauncher.launch(intent);
+                        }
+                        if (optn == 1){
+                            fileCheck = "pdf";
+                        }
+                        if (optn == 2){
+                            fileCheck = "docx";
+                        }
+                    }
+                });
+                builder.show();
+
+            }
+        });
+
     }
+
+    ActivityResultLauncher<Intent> fileActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    Intent data = result.getData();
+                    if (result.getResultCode() == Activity.RESULT_OK && data != null && data.getData() != null) {
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                        builder.setCancelable(false);
+                        builder.setView(R.layout.layout_loading_dialog);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+
+                        fileUri = data.getData();
+
+                        if (!fileCheck.equals("image")) {
+
+                        } else if (fileCheck.equals("image")) {
+
+                            StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Image Files");
+
+                            String fileName = this.queryName(getContentResolver(),fileUri);
+                            String pushID = new StringBuilder(FirebaseUtil.currentUserId()).append(fileName).toString();
+
+
+
+                            StorageReference path = storageReference.child(pushID + "." + "jpg");
+
+                            uploadTask = path.putFile(fileUri);
+                            uploadTask.continueWithTask(new com.google.android.gms.tasks.Continuation() {
+                                @Override
+                                public Object then(@NonNull Task task) throws Exception {
+                                    if (!task.isSuccessful()) {
+                                        throw task.getException();
+                                    }
+                                    return path.getDownloadUrl();
+                                }
+                            }).addOnCompleteListener(new OnCompleteListener() {
+                                                         @Override
+                                                         public void onComplete(@NonNull Task task) {
+                                                             if (task.isSuccessful()) {
+                                                                 Uri downloadUrl = (Uri) task.getResult();
+                                                                 myUrl = downloadUrl.toString();
+
+                                                                 chatroomModel.setLastMessageTimestamp(Timestamp.now());
+                                                                 chatroomModel.setLastMessageSenderId(FirebaseUtil.currentUserId());
+                                                                 chatroomModel.setLastMessage(myUrl);
+                                                                 FirebaseUtil.getChatroomReference(chatroomId).set(chatroomModel);
+
+                                                                 ChatMessageModel chatMessageModel = new ChatMessageModel(myUrl, FirebaseUtil.currentUserId(), Timestamp.now());
+                                                                 chatMessageModel.setType("image");
+                                                                 FirebaseUtil.getChatroomMessageReference(chatroomId).add(chatMessageModel)
+                                                                         .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                                             @Override
+                                                                             public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                                                 if (task.isSuccessful()) {
+                                                                                     dialog.dismiss();
+
+                                                                                     messageInput.setText("");
+                                                                                     sendNotification(myUrl);
+                                                                                 }
+                                                                                 else {
+                                                                                     dialog.dismiss();
+                                                                                 }
+                                                                             }
+                                                                         });
+                                                             }
+                                                         }
+                                                     }
+                            );
+
+
+                        } else {
+                            dialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "No File Selected", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                }
+                private String queryName(ContentResolver resolver, Uri uri) {
+                    Cursor returnCursor =
+                            resolver.query(uri, null, null, null, null);
+                    assert returnCursor != null;
+                    int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                    returnCursor.moveToFirst();
+                    String name = returnCursor.getString(nameIndex);
+                    returnCursor.close();
+                    return name;
+                }
+
+
+            }
+    );
 
     void setupChatRecyclerView(){
         Query query = FirebaseUtil.getChatroomMessageReference(chatroomId)
@@ -123,7 +289,9 @@ public class ChatActivity extends AppCompatActivity {
         FirebaseUtil.getChatroomReference(chatroomId).set(chatroomModel);
 
         ChatMessageModel chatMessageModel = new ChatMessageModel(message,FirebaseUtil.currentUserId(),Timestamp.now());
+        chatMessageModel.setType("text");
         FirebaseUtil.getChatroomMessageReference(chatroomId).add(chatMessageModel)
+
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {

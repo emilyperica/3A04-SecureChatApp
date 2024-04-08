@@ -7,6 +7,8 @@ public class ChatMessageModel {
     private String senderId;
     private Timestamp timestamp;
 
+    private String type;
+
     public ChatMessageModel() {
     }
 
@@ -38,5 +40,13 @@ public class ChatMessageModel {
 
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public void setType(String type){
+        this.type = type;
+    }
+
+    public String getType(){
+        return type;
     }
 }

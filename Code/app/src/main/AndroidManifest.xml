@@ -21,7 +21,6 @@
                 android:value="" />
         </activity>
         <activity
-
             android:name=".SearchUserActivity"
             android:exported="false">
             <meta-data
@@ -29,6 +28,7 @@
                 android:value="" />
         </activity>
 
+        <activity
             android:name=".HelperClass_AccountMgmt"
             android:exported="false" />
 
@@ -55,7 +55,8 @@
         </activity>
         <activity
             android:name=".SplashActivity"
-            android:exported="true">
+            android:exported="true" />
+        <activity
             android:name=".Signup_AccountMgmt"
             android:exported="false" />
         <activity

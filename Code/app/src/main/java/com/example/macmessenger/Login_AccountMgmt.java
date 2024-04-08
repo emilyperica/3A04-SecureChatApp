@@ -102,7 +102,7 @@ public class Login_AccountMgmt extends AppCompatActivity {
 
                     if(passwordFromDB.equals(userPassword)){
                         loginUsername.setError(null);
-                        Intent intent =new Intent(Login_AccountMgmt.this,Messaging.class); //change to MainActivity.class after merge to main. 
+                        Intent intent =new Intent(Login_AccountMgmt.this,MainActivity.class); //change to MainActivity.class after merge to main.
                         startActivity(intent);
                     }else{
                         loginPassword.setError("Invalid credentials");
